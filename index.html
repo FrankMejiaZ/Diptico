@@ -18,7 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
   <!-- Estilos del Proyecto -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.5">
 </head>
 <body>
 
@@ -362,7 +362,23 @@
       <h3 style="color: #ffffff; font-size: 1.3rem; margin-bottom: 0.3rem; font-family: 'Cinzel', serif;">Acceso Móvil al Díptico</h3>
       <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1.25rem;">Ideal para proyectar en pantallas o imprimir en tarjetas</p>
       
-      <div id="qr-canvas-container" style="display: flex; flex-direction: column; align-items: center;"></div>
+      <div id="qr-canvas-container" style="display: flex; flex-direction: column; align-items: center;">
+        <div style="background: #ffffff; padding: 1.25rem; border-radius: 14px; display: inline-block; box-shadow: 0 8px 30px rgba(0,0,0,0.35); margin-bottom: 1rem;">
+          <img src="assets/images/qr_diptico.png" alt="Código QR Díptico Oficial" style="width: 220px; height: 220px; display: block; border-radius: 8px;">
+        </div>
+        
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem; width: 100%;">
+          <a href="assets/images/qr_diptico.png" download="QR-Diptico-Santa-Teresita-91-Aniversario.png" class="btn-ctrl" style="background: linear-gradient(135deg, #d4af37, #b8860b); color: #06182c; border: none; font-weight: 700; padding: 0.55rem 1.2rem; text-decoration: none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            <span>Descargar Imagen QR (PNG)</span>
+          </a>
+
+          <p style="color: #cbd5e1; font-size: 0.85rem; max-width: 320px; text-align: center; line-height: 1.4;">
+            Enlace directo: <strong style="color: #f7df8b; word-break: break-all;">https://aniversario-santateresita.vercel.app</strong>
+            <br><span style="color: #94a3b8; font-size: 0.75rem;">Escanea con la cámara de cualquier teléfono para abrir el díptico.</span>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -395,7 +411,7 @@
   <div id="toast-notification" class="toast-msg"></div>
 
   <!-- Scripts -->
-  <script src="assets/js/petals.js"></script>
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/petals.js?v=2.5"></script>
+  <script src="assets/js/app.js?v=2.5"></script>
 </body>
 </html>

@@ -37,10 +37,15 @@ html {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--c-navy-900);
   color: var(--c-text-main);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
   background: radial-gradient(circle at 50% 10%, #153c69 0%, #081d34 50%, #040e1a 100%);
   position: relative;
@@ -51,8 +56,8 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 5;
 }
@@ -72,75 +77,85 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
+  width: 100%;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  background: rgba(6, 24, 44, 0.82);
+  background: rgba(6, 24, 44, 0.92);
   border-bottom: 1px solid rgba(207, 168, 59, 0.25);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .nav-container {
   max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0.75rem 1.25rem;
+  padding: 0.65rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
+  box-sizing: border-box;
 }
 
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
   text-decoration: none;
+  min-width: 0;
 }
 
 .brand-badge {
   background: linear-gradient(135deg, var(--c-gold-light), var(--c-gold-dark));
   color: #06182c;
   font-weight: 800;
-  font-size: 0.85rem;
-  padding: 0.3rem 0.65rem;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.55rem;
   border-radius: 9999px;
   box-shadow: 0 2px 8px var(--c-gold-glow);
   letter-spacing: 0.05em;
+  flex-shrink: 0;
 }
 
 .brand-title {
   color: #ffffff;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 .brand-sub {
   color: var(--c-gold-light);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
 }
 
 /* Nav Actions */
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.45rem;
+  flex-shrink: 0;
 }
 
 .btn-nav {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.5rem 0.9rem;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.8rem;
   border-radius: 9999px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition-smooth);
   border: 1px solid transparent;
   text-decoration: none;
+  min-height: 36px;
 }
 
 .btn-nav-gold {
@@ -176,34 +191,48 @@ body {
 /* Mode Switcher Tabs */
 .view-switcher-bar {
   max-width: 680px;
-  margin: 1.5rem auto 1rem auto;
-  padding: 0 1rem;
+  width: 100%;
+  margin: 1.2rem auto 1rem auto;
+  padding: 0 0.85rem;
+  box-sizing: border-box;
 }
 
 .switcher-pill-group {
-  background: rgba(11, 41, 74, 0.6);
+  background: rgba(11, 41, 74, 0.75);
   border: 1px solid rgba(207, 168, 59, 0.3);
   border-radius: 9999px;
-  padding: 0.35rem;
+  padding: 0.3rem;
   display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  gap: 0.25rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.switcher-pill-group::-webkit-scrollbar {
+  display: none;
 }
 
 .switcher-btn {
   flex: 1;
-  padding: 0.65rem 1rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 0.55rem 0.9rem;
   border-radius: 9999px;
   background: transparent;
   border: none;
   color: #94a3b8;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: var(--transition-smooth);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
 .switcher-btn:hover {
@@ -973,18 +1002,25 @@ body {
 /* ==========================================================================
    RESPONSIVE DESIGN (MÓVILES Y TABLETS)
    ========================================================================== */
+/* ==========================================================================
+   RESPONSIVE DESIGN (MÓVILES Y TABLETS)
+   ========================================================================== */
 @media (max-width: 960px) {
   .diptico-book {
     flex-direction: column;
     width: 100%;
     max-width: 440px;
+    box-shadow: none;
+    background: transparent;
   }
 
   .diptico-page {
     width: 100%;
+    max-width: 100%;
     height: auto;
     aspect-ratio: 1 / 1.414;
-    border-radius: 8px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
 
   .spine-shadow {
@@ -992,41 +1028,243 @@ body {
   }
 
   .page-left {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .events-grid {
     grid-template-columns: 1fr;
+    width: 100%;
   }
 }
 
 @media (max-width: 640px) {
+  /* Navbar */
+  .nav-container {
+    padding: 0.5rem 0.65rem;
+    gap: 0.4rem;
+  }
+
+  .brand-badge {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.45rem;
+  }
+
   .brand-title {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
   }
   
   .brand-sub {
     display: none;
   }
 
+  .nav-actions {
+    gap: 0.3rem;
+  }
+
+  .btn-nav {
+    padding: 0.4rem 0.55rem;
+    min-height: 32px;
+  }
+
   .btn-nav span {
     display: none;
   }
 
-  .section-title {
-    font-size: 1.6rem;
+  /* View Switcher */
+  .view-switcher-bar {
+    padding: 0 0.5rem;
+    margin: 0.8rem auto;
   }
 
+  .switcher-pill-group {
+    padding: 0.25rem;
+    border-radius: 12px;
+  }
+
+  .switcher-btn {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.78rem;
+  }
+
+  /* Sections */
+  .agenda-section,
+  .diptico-stage {
+    padding: 0.75rem 0.6rem 2.5rem 0.6rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .section-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .section-tag {
+    font-size: 0.72rem;
+  }
+
+  .section-title {
+    font-size: 1.45rem;
+    line-height: 1.25;
+  }
+
+  .section-desc {
+    font-size: 0.85rem;
+  }
+
+  .diptico-instructions {
+    font-size: 0.78rem;
+    padding: 0.4rem 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Diptico Book */
+  .book-perspective-wrap {
+    padding: 0.5rem 0 1rem 0;
+  }
+
+  .diptico-page {
+    max-width: 350px;
+  }
+
+  .diptico-controls {
+    gap: 0.35rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .btn-ctrl {
+    font-size: 0.76rem;
+    padding: 0.45rem 0.75rem;
+  }
+
+  /* Toolbar & Filtros */
+  .agenda-toolbar {
+    padding: 0.85rem 0.65rem;
+    border-radius: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  .date-pill {
+    min-width: 65px;
+    padding: 0.45rem 0.65rem;
+  }
+
+  .date-pill-day {
+    font-size: 1.1rem;
+  }
+
+  .filter-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+
+  .category-chips {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.25rem;
+    width: 100%;
+  }
+
+  .category-chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chip {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.65rem;
+  }
+
+  .search-box {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .search-box input {
+    font-size: 0.8rem;
+    padding: 0.45rem 0.8rem 0.45rem 2rem;
+  }
+
+  /* Event Cards */
+  .event-card {
+    padding: 1rem;
+    border-radius: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .event-title {
+    font-size: 1.05rem;
+  }
+
+  .event-detail-item {
+    font-size: 0.8rem;
+  }
+
+  /* Juegos Florales */
+  .juegos-florales-hero {
+    padding: 1.25rem 0.8rem;
+    border-radius: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  .juegos-motto {
+    font-size: 1.1rem;
+  }
+
+  .subtabs-nav {
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+  }
+
+  .subtab-btn {
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  /* Parchment Directora */
   .directora-parchment {
-    padding: 1.8rem 1.2rem;
+    padding: 1.5rem 0.9rem;
+    border-radius: 12px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .directora-presentacion-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 
   .directora-body p {
-    font-size: 0.95rem;
-    line-height: 1.65;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .directora-firma {
+    font-size: 1.2rem;
+  }
+
+  /* Modals */
+  .modal-container {
+    padding: 1.25rem 1rem;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 95vw;
+    box-sizing: border-box;
+  }
+
+  .modal-close-btn {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 32px;
+    height: 32px;
   }
 }
