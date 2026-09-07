@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>91° Aniversario | I.E.E. Santa Teresita - Díptico Interactivo Oficial</title>
+  
+  <!-- Metadatos institucionales y OpenGraph -->
+  <meta name="description" content="Díptico interactivo conmemorativo del 91° Aniversario de la Institución Educativa Emblemático Santa Teresita de Cajamarca. Programa oficial de actividades, Juegos Florales y saludo institucional.">
+  <meta property="og:title" content="91° Aniversario I.E.E. Santa Teresita - Díptico Interactivo">
+  <meta property="og:description" content="Un legado que inspira, un futuro que construimos juntos. Ciencia - Virtud - Acción.">
+  <meta property="og:image" content="assets/images/panel_portada.webp">
+  <meta property="og:type" content="website">
+
+  <!-- Tipografías de Google (Cinzel para títulos solemnes, Playfair Display y Outfit para lectura moderna) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- Estilos del Proyecto -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Canvas de Efecto de Rosas ("Bajo una lluvia de rosas") -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Barra de Navegación Superior -->
+  <header class="top-navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <div class="brand-badge">91 AÑOS</div>
+        <div>
+          <div class="brand-title font-serif-solemn">I.E.E. Santa Teresita</div>
+          <div class="brand-sub">Cajamarca • 1935 - 2026</div>
+        </div>
+      </a>
+
+      <!-- Acciones Rápidas -->
+      <div class="nav-actions">
+        <!-- Botón Efecto Pétalos de Rosa -->
+        <button id="toggle-petals-btn" class="btn-nav btn-nav-outline btn-nav-petals active" title="Alternar lluvia de rosas teresianas">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <span>Pétalos</span>
+        </button>
+
+        <!-- Botón Ver Código QR -->
+        <button id="btn-qr-main" class="btn-nav btn-nav-outline" title="Ver Código QR para proyectar o imprimir">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
+          <span>Código QR</span>
+        </button>
+
+        <!-- Botón Compartir -->
+        <button id="btn-share-main" class="btn-nav btn-nav-outline" title="Compartir Díptico en redes o WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+          <span>Compartir</span>
+        </button>
+
+        <!-- Botón Descargar PDF Oficial -->
+        <a href="assets/docs/diptico-oficial.pdf" download="Diptico-Oficial-91-Aniversario-Santa-Teresita.pdf" class="btn-nav btn-nav-gold" title="Descargar documento oficial en PDF original">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+          <span>Descargar PDF</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Selector de Vistas / Pestañas de Navegación Rápida -->
+  <div class="view-switcher-bar">
+    <div class="switcher-pill-group">
+      <button class="switcher-btn active" data-target="diptico">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+        <span>Díptico 3D</span>
+      </button>
+      <button class="switcher-btn" data-target="agenda">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <span>Agenda Oficial</span>
+      </button>
+      <button class="switcher-btn" data-target="juegos">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        <span>Juegos Florales</span>
+      </button>
+      <button class="switcher-btn" data-target="directora">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        <span>Saludo Directora</span>
+      </button>
+      <button class="switcher-btn" data-target="all">
+        <span>Ver Todo</span>
+      </button>
+    </div>
+  </div>
+
+  <main>
+    <!-- ====================================================================
+         SECCIÓN 1: DÍPTICO 3D DESPLEGABLE
+         ==================================================================== -->
+    <section id="sec-diptico" class="diptico-stage">
+      
+      <!-- Indicador de Estado -->
+      <div class="diptico-instructions">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></svg>
+        <span id="diptico-state-label">Interior Desplegado: Saludo Institucional y Programa de Actividades</span>
+      </div>
+
+      <!-- Contenedor del Folleto / Díptico 3D -->
+      <div class="book-perspective-wrap">
+        <div id="diptico-book-container" class="diptico-book">
+          
+          <!-- Cara Izquierda (Interior Izquierdo o Contraportada según estado) -->
+          <div class="diptico-page page-left" id="book-page-left">
+            <img id="book-page-left-img" src="assets/images/panel_interior_izq.webp" alt="Interior Izquierdo">
+            <button class="zoom-hint-btn" id="zoom-btn-left" data-img="assets/images/panel_interior_izq.png" title="Ampliar en Alta Definición">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+              <span>Ver HD</span>
+            </button>
+          </div>
+
+          <!-- Sombra del Lomo Central (Spine) -->
+          <div class="spine-shadow"></div>
+
+          <!-- Cara Derecha (Interior Derecho o Portada según estado) -->
+          <div class="diptico-page page-right" id="book-page-right">
+            <img id="book-page-right-img" src="assets/images/panel_interior_der.webp" alt="Interior Derecho">
+            <button class="zoom-hint-btn" id="zoom-btn-right" data-img="assets/images/panel_interior_der.png" title="Ampliar en Alta Definición">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+              <span>Ver HD</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Controles Interactivos del Díptico -->
+      <div class="diptico-controls">
+        <button id="btn-view-abierto" class="btn-ctrl active">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span>Interior Desplegado</span>
+        </button>
+
+        <button id="btn-view-portada" class="btn-ctrl">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 6 4-6 4Z"/></svg>
+          <span>Portada (Carátula)</span>
+        </button>
+
+        <button id="btn-view-contraportada" class="btn-ctrl">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Fechas Centrales (25 y 26)</span>
+        </button>
+
+        <button id="btn-zoom-page1" class="btn-ctrl" title="Ver Lámina 1 completa del díptico original">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></svg>
+          <span>Lámina Exterior (Full HD)</span>
+        </button>
+
+        <button id="btn-zoom-page2" class="btn-ctrl" title="Ver Lámina 2 completa del díptico original">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></svg>
+          <span>Lámina Interior (Full HD)</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ====================================================================
+         SECCIÓN 2: AGENDA INTERACTIVA Y BUSCADOR POR FECHAS
+         ==================================================================== -->
+    <section id="sec-agenda" class="agenda-section">
+      <div class="section-header">
+        <span class="section-tag">Cronograma Oficial 2026</span>
+        <h2 class="section-title font-serif-solemn">Programa General de Actividades</h2>
+        <p class="section-desc">
+          Explora los actos protocolares, celebraciones religiosas, competencias deportivas y eventos culturales del 91° Aniversario.
+        </p>
+      </div>
+
+      <!-- Barra de Filtros y Búsqueda -->
+      <div class="agenda-toolbar">
+        
+        <!-- Carrusel de Fechas Seleccionables -->
+        <div class="date-slider-container">
+          <button class="date-pill active" data-date="all">
+            <span class="date-pill-day">Todas</span>
+            <span class="date-pill-month">Fechas</span>
+          </button>
+          <button class="date-pill" data-date="14">
+            <span class="date-pill-day">14</span>
+            <span class="date-pill-month">SET</span>
+          </button>
+          <button class="date-pill" data-date="15">
+            <span class="date-pill-day">15</span>
+            <span class="date-pill-month">SET</span>
+          </button>
+          <button class="date-pill" data-date="16">
+            <span class="date-pill-day">16</span>
+            <span class="date-pill-month">SET</span>
+          </button>
+          <button class="date-pill" data-date="17">
+            <span class="date-pill-day">17</span>
+            <span class="date-pill-month">SET</span>
+          </button>
+          <button class="date-pill" data-date="18">
+            <span class="date-pill-day">18</span>
+            <span class="date-pill-month">SET</span>
+          </button>
+          <button class="date-pill" data-date="21">
+            <span class="date-pill-day">21</span>
+            <span class="date-pill-month">SET</span>
+          </button>
+          <button class="date-pill" data-date="22">
+            <span class="date-pill-day">22</span>
+            <span class="date-pill-month">SET</span>
+          </button>
+          <button class="date-pill" data-date="23">
+            <span class="date-pill-day">23</span>
+            <span class="date-pill-month">SET</span>
+          </button>
+          <button class="date-pill" data-date="24">
+            <span class="date-pill-day">24</span>
+            <span class="date-pill-month">SET</span>
+          </button>
+          <button class="date-pill" data-date="25">
+            <span class="date-pill-day">25</span>
+            <span class="date-pill-month">SET</span>
+          </button>
+          <button class="date-pill" data-date="26">
+            <span class="date-pill-day">26</span>
+            <span class="date-pill-month">SET</span>
+          </button>
+        </div>
+
+        <!-- Fila de Categorías y Buscador en Tiempo Real -->
+        <div class="filter-row">
+          <div class="category-chips">
+            <button class="chip active" data-category="all">Todos</button>
+            <button class="chip" data-category="primaria">Primaria</button>
+            <button class="chip" data-category="secundaria">Secundaria</button>
+            <button class="chip" data-category="protocolar">Protocolar / Religioso</button>
+            <button class="chip" data-category="deportes">Deportes & Exalumnas</button>
+            <button class="chip" data-category="juegos">Arte & Cultura</button>
+          </div>
+
+          <div class="search-box">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></svg>
+            <input type="text" id="search-input" placeholder="Buscar actividad, lugar o disciplina...">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Cuadrícula Dinámica de Eventos -->
+      <div id="events-container" class="events-grid">
+        <!-- Renderizado dinámico vía JavaScript -->
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECCIÓN 3: JUEGOS FLORALES TERESIANOS 2026
+         ==================================================================== -->
+    <section id="sec-juegos" class="agenda-section">
+      <div class="juegos-florales-hero">
+        <span class="juegos-title-badge">21 DE SETIEMBRE</span>
+        <h2 class="section-title font-serif-solemn" style="margin-bottom: 0.2rem;">“JUEGOS FLORALES TERESIANOS 2026”</h2>
+        <p class="juegos-motto">“Caminito de Santa Teresita: Floreciendo en Arte y Talento”</p>
+      </div>
+
+      <!-- Sub-pestañas Nivel Secundaria vs Nivel Primaria -->
+      <div class="subtabs-nav">
+        <button id="tab-juegos-sec" class="subtab-btn active">
+          Nivel Secundaria (9 Áreas Curriculares)
+        </button>
+        <button id="tab-juegos-prim" class="subtab-btn">
+          Nivel Primaria (1er a 6to Grado)
+        </button>
+      </div>
+
+      <!-- Contenedores de Actividades -->
+      <div id="juegos-secundaria-grid" class="events-grid">
+        <!-- Dinámico -->
+      </div>
+
+      <div id="juegos-primaria-grid" class="events-grid" style="display: none;">
+        <!-- Dinámico -->
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECCIÓN 4: DISCURSO DIRECTORA (MODO LECTURA SOLEMNE)
+         ==================================================================== -->
+    <section id="sec-directora" class="agenda-section">
+      <div class="directora-parchment">
+        
+        <div class="directora-header">
+          <span class="section-tag" style="color: #99781a;">Mensaje Institucional</span>
+          <h2 class="directora-presentacion-title">Presentación</h2>
+        </div>
+
+        <div class="directora-body">
+          <p>
+            <strong>¡Estimada Comunidad Educativa Santa Teresita, apreciadas Exalumnas y entrañable Región de Cajamarca!</strong> Me llena de regocijo estrechar un afectuoso saludo, con ocasión de celebrar el nonagésimo primer año de vida institucional. Celebramos 91 años, educando con excelencia a la niñez y juventud cajamarquina, consolidándonos como un faro vivo de luz, dignidad y esperanza que ilumina a toda nuestra región.
+          </p>
+
+          <p>
+            Nacida para guiar la educación femenina, la <strong>I.E.E. Santa Teresita</strong> forma a las líderes de nuestra sociedad. Frente a los desafíos de hoy, respondemos con pedagogía contemporánea e innovadora, preparando ciudadanas críticas, éticas y competentes para los desafíos del siglo XXI.
+          </p>
+
+          <p>
+            Renovamos el compromiso sagrado de evangelizar desde la cultura, los valores y la fe. Trascendemos la simple instrucción para ofrecer un aprendizaje integral donde la fe se vive, la ciencia se descubre y los valores guían el pensamiento y la vida de las nuevas generaciones.
+          </p>
+
+          <p>
+            Agradecemos a Dios y a nuestra patrona, <strong>Santa Teresita del Niño Jesús</strong>, por sostener nuestra labor. Este proyecto triunfa gracias a la alianza con los padres de familia y a la responsabilidad de nuestras estudiantes. ¡Que la bendición divina nos acompañe para seguir educando con ciencia, virtud y acción!
+          </p>
+        </div>
+
+        <div class="directora-closing">
+          <p class="directora-bendicion">¡¡¡ Feliz y bendecido 91 Aniversario Institucional !!!</p>
+          <div class="directora-firma">Sor Margarita Castilla Félix</div>
+          <div class="directora-cargo">DIRECTORA</div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Pie de Página Institucional -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-motto font-serif-solemn">CIENCIA • VIRTUD • ACCIÓN</div>
+      <p style="font-size: 1rem; color: #e2e8f0; font-weight: 600;">
+        “Un legado que inspira, un futuro que construimos juntos”
+      </p>
+      <p style="font-size: 0.85rem; color: #94a3b8; max-width: 600px;">
+        Institución Educativa Emblemático Santa Teresita — Cajamarca, Perú.<br>
+        91 Años formando corazones que transforman el presente y construyen futuro.
+      </p>
+      <div style="font-size: 0.75rem; color: #64748b; margin-top: 0.5rem;">
+        Versión digital interactiva oficial • Desarrollada con honor teresiano
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================================================================
+       MODAL 1: ZOOM EN ALTA RESOLUCIÓN DE LÁMINAS
+       ==================================================================== -->
+  <div id="modal-zoom" class="modal-overlay">
+    <button class="modal-close-btn" title="Cerrar vista HD">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+    </button>
+    <div class="modal-zoom-container">
+      <img id="modal-zoom-target-img" class="modal-zoom-img" src="" alt="Lámina Díptico Alta Definición">
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       MODAL 2: CÓDIGO QR PARA PROYECCIÓN O IMPRESIÓN
+       ==================================================================== -->
+  <div id="modal-qr" class="modal-overlay">
+    <div class="modal-container" style="text-align: center;">
+      <button class="modal-close-btn" title="Cerrar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+      </button>
+      <h3 style="color: #ffffff; font-size: 1.3rem; margin-bottom: 0.3rem; font-family: 'Cinzel', serif;">Acceso Móvil al Díptico</h3>
+      <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1.25rem;">Ideal para proyectar en pantallas o imprimir en tarjetas</p>
+      
+      <div id="qr-canvas-container" style="display: flex; flex-direction: column; align-items: center;"></div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       MODAL 3: COMPARTIR EN REDES Y WHATSAPP
+       ==================================================================== -->
+  <div id="modal-share" class="modal-overlay">
+    <div class="modal-container">
+      <button class="modal-close-btn" title="Cerrar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+      </button>
+      <h3 style="color: #ffffff; font-size: 1.3rem; margin-bottom: 0.3rem; font-family: 'Cinzel', serif;">Compartir Díptico Digital</h3>
+      <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1.5rem;">Difunde el programa con la comunidad educativa teresiana</p>
+
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <button id="share-whatsapp-btn" class="btn-ctrl" style="justify-content: center; background: #25D366; color: #ffffff; border: none;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.25-1.48-1.39-1.73-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.3 3.8.6.26 1.07.41 1.44.53.6.19 1.15.16 1.59.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.12-.22-.19-.47-.32"/></svg>
+          <span>Compartir por WhatsApp</span>
+        </button>
+
+        <button id="share-copylink-btn" class="btn-ctrl" style="justify-content: center; background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          <span>Copiar Enlace Web</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificación Toast -->
+  <div id="toast-notification" class="toast-msg"></div>
+
+  <!-- Scripts -->
+  <script src="assets/js/petals.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
