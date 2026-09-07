@@ -54,34 +54,18 @@ Para evitar conflictos con puertos de Docker u otros proyectos (como 80, 8080, 3
 
 ---
 
-## 🌐 Cómo publicar GRATIS en GitHub Pages (Paso a Paso)
+## 🌐 Enlace Web Oficial
 
-Tu repositorio es: [https://github.com/FrankMejiaZ/Diptico](https://github.com/FrankMejiaZ/Diptico)
+El proyecto se encuentra publicado y accesible en:
+👉 **[https://aniversario-santateresita.vercel.app](https://aniversario-santateresita.vercel.app)**
 
-Para tener tu enlace web público y accesible para cualquier persona mediante un código QR o enlace en redes sociales:
+Cualquier persona, estudiante, padre de familia o autoridad puede abrirlo desde cualquier celular o computadora escaneando el código QR o pulsando el link.
 
-1. **Sube los cambios a GitHub:**
-   Abre una terminal en esta carpeta y ejecuta:
-   ```bash
-   git add .
-   git commit -m "feat: Diptico interactivo 3D del 91 Aniversario Santa Teresita"
-   git push -u origin main
-   ```
-   *(Si es la primera vez, pedirá iniciar sesión con tu cuenta de GitHub).*
+---
 
-2. **Activa GitHub Pages en la web de GitHub:**
-   - Ve a tu repositorio: `https://github.com/FrankMejiaZ/Diptico`
-   - Haz clic en la pestaña **Settings** (Configuración) arriba a la derecha.
-   - En el menú lateral izquierdo, haz clic en **Pages**.
-   - En **Build and deployment** > **Source**, selecciona **"Deploy from a branch"**.
-   - En **Branch**, selecciona la rama **`main`** y la carpeta **`/(root)`**.
-   - Haz clic en **Save** (Guardar).
+## 🚀 Despliegue Automático
 
-3. **¡Listo!** En unos 60 segundos, GitHub generará tu enlace público oficial:
-   ```
-   https://frankmejiaz.github.io/Diptico/
-   ```
-   Cualquier persona, estudiante, padre de familia o autoridad podrá abrirlo desde cualquier celular en el mundo escaneando el código QR o pulsando el link.
+Este repositorio está conectado con **Vercel**. Cada vez que se realiza un `git push` a la rama `main`, Vercel actualiza el sitio web automáticamente en segundos.
 
 ---
 

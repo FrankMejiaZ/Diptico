@@ -734,8 +734,8 @@ function initShareFeatures() {
   const copyLinkBtn = document.getElementById('share-copylink-btn');
   const qrContainer = document.getElementById('qr-canvas-container');
 
-  // URL Oficial en GitHub Pages (para que el QR y compartir siempre apunten a la web pública)
-  const OFFICIAL_PRODUCTION_URL = 'https://frankmejiaz.github.io/Diptico/';
+  // URL Oficial en Vercel (para que el QR y compartir siempre apunten a la web pública del colegio)
+  const OFFICIAL_PRODUCTION_URL = 'https://aniversario-santateresita.vercel.app';
   const currentUrl = (window.location.protocol.startsWith('http') && !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1'))
     ? window.location.href
     : OFFICIAL_PRODUCTION_URL;
@@ -846,7 +846,7 @@ function showToast(message) {
  */
 function renderInlineQRCode(container, url) {
   if (!container) return;
-  const qrTargetUrl = 'https://frankmejiaz.github.io/Diptico/';
+  const qrTargetUrl = 'https://aniversario-santateresita.vercel.app';
 
   container.innerHTML = `
     <div style="background: #ffffff; padding: 1.25rem; border-radius: 14px; display: inline-block; box-shadow: 0 8px 30px rgba(0,0,0,0.35); margin-bottom: 1rem;">
