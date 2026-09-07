@@ -734,9 +734,14 @@ function initShareFeatures() {
   const copyLinkBtn = document.getElementById('share-copylink-btn');
   const qrContainer = document.getElementById('qr-canvas-container');
 
-  const currentUrl = window.location.href;
+  // URL Oficial en GitHub Pages (para que el QR y compartir siempre apunten a la web pública)
+  const OFFICIAL_PRODUCTION_URL = 'https://frankmejiaz.github.io/Diptico/';
+  const currentUrl = (window.location.protocol.startsWith('http') && !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1'))
+    ? window.location.href
+    : OFFICIAL_PRODUCTION_URL;
+
   const shareTitle = '91° Aniversario I.E.E. Santa Teresita - Programa Oficial Interactivo';
-  const shareText = `¡Te invitamos a celebrar los 91 Años de la I.E.E. Santa Teresita de Cajamarca!\nRevisa el programa de actividades, fechas y juegos florales de manera interactiva aquí:\n${currentUrl}`;
+  const shareText = `¡Te invitamos a celebrar los 91 Años de la I.E.E. Santa Teresita de Cajamarca!\nRevisa el programa oficial de actividades, fechas y juegos florales de manera interactiva aquí:\n${currentUrl}`;
 
   if (shareBtn && shareModal) {
     shareBtn.addEventListener('click', () => {
@@ -765,9 +770,9 @@ function initShareFeatures() {
   if (copyLinkBtn) {
     copyLinkBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(currentUrl).then(() => {
-        showToast('¡Enlace copiado al portapapeles!');
+        showToast('¡Enlace web copiado al portapapeles!');
       }).catch(() => {
-        showToast('Enlace listo para copiar: ' + currentUrl);
+        showToast('Enlace oficial: ' + currentUrl);
       });
     });
   }
@@ -836,20 +841,28 @@ function showToast(message) {
 }
 
 /**
- * Generador de Código QR nativo SVG
- * Usa una API ligera de renderizado en caso online o genera un placeholder vectorial de alta fidelidad
+ * Generador de Código QR local y descargable
+ * Apunta directamente a https://frankmejiaz.github.io/Diptico/
  */
 function renderInlineQRCode(container, url) {
   if (!container) return;
-  const encoded = encodeURIComponent(url);
-  const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=10&color=06182c&bgcolor=ffffff&data=${encoded}`;
+  const qrTargetUrl = 'https://frankmejiaz.github.io/Diptico/';
 
   container.innerHTML = `
-    <div style="background: #ffffff; padding: 1.25rem; border-radius: 12px; display: inline-block; box-shadow: 0 4px 20px rgba(0,0,0,0.25);">
-      <img src="${qrApiUrl}" alt="Código QR Díptico" style="width: 220px; height: 220px; display: block;" onerror="this.src='assets/images/panel_portada.webp'">
+    <div style="background: #ffffff; padding: 1.25rem; border-radius: 14px; display: inline-block; box-shadow: 0 8px 30px rgba(0,0,0,0.35); margin-bottom: 1rem;">
+      <img src="assets/images/qr_diptico.png" alt="Código QR Díptico Oficial" style="width: 230px; height: 230px; display: block; border-radius: 8px;">
     </div>
-    <p style="margin-top: 1rem; color: #cbd5e1; font-size: 0.85rem; max-width: 280px; text-align: center;">
-      Escanea con la cámara de cualquier teléfono para abrir el díptico interactivo.
-    </p>
+    
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
+      <a href="assets/images/qr_diptico.png" download="QR-Diptico-Santa-Teresita-91-Aniversario.png" class="btn-ctrl" style="background: linear-gradient(135deg, #d4af37, #b8860b); color: #06182c; border: none; font-weight: 700; padding: 0.55rem 1.2rem; text-decoration: none;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        <span>Descargar Imagen QR (PNG)</span>
+      </a>
+
+      <p style="color: #cbd5e1; font-size: 0.82rem; max-width: 300px; text-align: center; line-height: 1.4;">
+        Enlace directo: <strong style="color: #f7df8b; word-break: break-all;">${qrTargetUrl}</strong>
+        <br><span style="color: #94a3b8; font-size: 0.75rem;">Escanea con la cámara de cualquier teléfono para abrir el díptico.</span>
+      </p>
+    </div>
   `;
 }
