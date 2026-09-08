@@ -7,6 +7,7 @@
 const EVENTOS_TERESIANOS = [
   {
     id: 'ev-14-primaria',
+    imagen: null,
     dia: '14',
     mes: 'Setiembre',
     fechaCompleta: '14 de Setiembre de 2026',
@@ -15,13 +16,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'primaria',
     categoriaNombre: 'Nivel Primaria',
     hora: 'En horario de clases',
-    horaCal: '08:30',
     lugar: 'Escenario y patio del nivel primaria',
     lugarTipo: 'colegio',
     descripcion: 'Dinámica lúdica y formativa para estudiantes de primer grado en el marco de los Juegos Florales.'
   },
   {
     id: 'ev-15-canonesas-act',
+    imagen: 'assets/images/eventos/canonesas_cruz.jpeg',
     dia: '15',
     mes: 'Setiembre',
     fechaCompleta: '15 de Setiembre de 2026',
@@ -30,13 +31,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'protocolar',
     categoriaNombre: 'Protocolar / Religioso',
     hora: '10:00 am',
-    horaCal: '10:00',
     lugar: 'Patio de secundaria',
     lugarTipo: 'colegio',
     descripcion: 'Homenaje y conmemoración comunitaria por los 107 años de la Congregación Canonesas de la Cruz.'
   },
   {
     id: 'ev-15-canonesas-misa',
+    imagen: 'assets/images/eventos/canonesas_cruz.jpeg',
     dia: '15',
     mes: 'Setiembre',
     fechaCompleta: '15 de Setiembre de 2026',
@@ -45,13 +46,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'protocolar',
     categoriaNombre: 'Protocolar / Religioso',
     hora: '12:00 m',
-    horaCal: '12:00',
     lugar: 'Capilla de la IE',
     lugarTipo: 'colegio',
     descripcion: 'Solemne celebración eucarística en la capilla institucional.'
   },
   {
     id: 'ev-16-primaria-2do',
+    imagen: null,
     dia: '16',
     mes: 'Setiembre',
     fechaCompleta: '16 de Setiembre de 2026',
@@ -60,13 +61,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'primaria',
     categoriaNombre: 'Nivel Primaria',
     hora: 'En horario escolar',
-    horaCal: '09:00',
     lugar: 'Escenario y patio del nivel primaria',
     lugarTipo: 'colegio',
     descripcion: 'Actividad de integración cultural y matemática ancestral con la Chacana.'
   },
   {
     id: 'ev-16-primaria-6to',
+    imagen: null,
     dia: '16',
     mes: 'Setiembre',
     fechaCompleta: '16 de Setiembre de 2026',
@@ -75,13 +76,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'primaria',
     categoriaNombre: 'Nivel Primaria',
     hora: 'En horario escolar',
-    horaCal: '10:30',
     lugar: 'Escenario y patio del nivel primaria',
     lugarTipo: 'colegio',
     descripcion: 'Retos de conocimiento, agilidad y trabajo en equipo para la promoción de primaria.'
   },
   {
     id: 'ev-17-marinera',
+    imagen: null,
     dia: '17',
     mes: 'Setiembre',
     fechaCompleta: '17 de Setiembre de 2026',
@@ -90,13 +91,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'juegos',
     categoriaNombre: 'Arte y Cultura',
     hora: '8:30 am',
-    horaCal: '08:30',
     lugar: 'Coliseo de la IE',
     lugarTipo: 'colegio',
     descripcion: 'Demostración de talento, elegancia y ritmo con la tradicional marinera.'
   },
   {
     id: 'ev-17-primaria-5to',
+    imagen: null,
     dia: '17',
     mes: 'Setiembre',
     fechaCompleta: '17 de Setiembre de 2026',
@@ -105,13 +106,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'primaria',
     categoriaNombre: 'Nivel Primaria',
     hora: 'En horario escolar',
-    horaCal: '09:30',
     lugar: 'Escenario y patio del nivel primaria',
     lugarTipo: 'colegio',
     descripcion: 'Dinámica de razonamiento lógico y creatividad verbal.'
   },
   {
     id: 'ev-17-copa-exalumnas',
+    imagen: null,
     dia: '17',
     mes: 'Setiembre',
     fechaCompleta: 'Del 17 al 22 de Setiembre de 2026',
@@ -120,13 +121,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'deportes',
     categoriaNombre: 'Deportes / Exalumnas',
     hora: '5:30 pm',
-    horaCal: '17:30',
     lugar: 'Coliseo de la IE',
     lugarTipo: 'colegio',
     descripcion: 'Torneo de vóley y básquetbol entre promociones de exalumnas teresianas.'
   },
   {
     id: 'ev-18-deporte',
+    imagen: null,
     dia: '18',
     mes: 'Setiembre',
     fechaCompleta: '18 de Setiembre de 2026',
@@ -135,13 +136,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'deportes',
     categoriaNombre: 'Deportes',
     hora: '7:30 am',
-    horaCal: '07:30',
     lugar: 'Coliseo de la IE',
     lugarTipo: 'colegio',
     descripcion: 'Actividades deportivas integradoras para estudiantes y docentes.'
   },
   {
     id: 'ev-18-primaria-4to',
+    imagen: null,
     dia: '18',
     mes: 'Setiembre',
     fechaCompleta: '18 de Setiembre de 2026',
@@ -150,13 +151,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'primaria',
     categoriaNombre: 'Nivel Primaria',
     hora: 'En horario escolar',
-    horaCal: '10:00',
     lugar: 'Escenario y patio del nivel primaria',
     lugarTipo: 'colegio',
     descripcion: 'Desfile de trajes creativos elaborados con material reciclado.'
   },
   {
     id: 'ev-21-primaria-3ro',
+    imagen: null,
     dia: '21',
     mes: 'Setiembre',
     fechaCompleta: '21 de Setiembre de 2026',
@@ -165,13 +166,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'primaria',
     categoriaNombre: 'Nivel Primaria',
     hora: 'En horario escolar',
-    horaCal: '08:30',
     lugar: 'Escenario y patio del nivel primaria',
     lugarTipo: 'colegio',
     descripcion: 'Actividad interactiva de lectoescritura con valores de Santa Teresita.'
   },
   {
     id: 'ev-21-juegos-secundaria',
+    imagen: null,
     dia: '21',
     mes: 'Setiembre',
     fechaCompleta: '21 de Setiembre de 2026',
@@ -180,13 +181,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'secundaria',
     categoriaNombre: 'Nivel Secundaria',
     hora: 'Desde las 7:30 am',
-    horaCal: '07:30',
     lugar: 'Diversos ambientes de la IE (Coliseo, Aulas, Laboratorios, Gimnasio)',
     lugarTipo: 'colegio',
     descripcion: 'Gran fiesta pedagógica con 9 disciplinas simultáneas: DPCC, Matemática, Inglés, CC.SS., Comunicación, EPT, C&T, Arte y Cultura, y Educación Física.'
   },
   {
     id: 'ev-22-procesion',
+    imagen: 'assets/images/eventos/santa_teresita_patrona.jpeg',
     dia: '22',
     mes: 'Setiembre',
     fechaCompleta: '22 de Setiembre de 2026',
@@ -195,7 +196,6 @@ const EVENTOS_TERESIANOS = [
     categoria: 'protocolar',
     categoriaNombre: 'Protocolar / Religioso',
     hora: '7:30 am',
-    horaCal: '07:30',
     lugar: 'Salida de la IE hacia La Catedral',
     lugarTipo: 'externo',
     mapUrl: 'https://maps.google.com/?q=Catedral+de+Cajamarca',
@@ -203,6 +203,7 @@ const EVENTOS_TERESIANOS = [
   },
   {
     id: 'ev-22-misa',
+    imagen: 'assets/images/eventos/santa_teresita_patrona.jpeg',
     dia: '22',
     mes: 'Setiembre',
     fechaCompleta: '22 de Setiembre de 2026',
@@ -211,7 +212,6 @@ const EVENTOS_TERESIANOS = [
     categoria: 'protocolar',
     categoriaNombre: 'Protocolar / Religioso',
     hora: '9:00 am',
-    horaCal: '09:00',
     lugar: 'Iglesia La Catedral de Cajamarca',
     lugarTipo: 'externo',
     mapUrl: 'https://maps.google.com/?q=Catedral+de+Cajamarca',
@@ -219,6 +219,7 @@ const EVENTOS_TERESIANOS = [
   },
   {
     id: 'ev-23-pregon',
+    imagen: null,
     dia: '23',
     mes: 'Setiembre',
     fechaCompleta: '23 de Setiembre de 2026',
@@ -227,7 +228,6 @@ const EVENTOS_TERESIANOS = [
     categoria: 'protocolar',
     categoriaNombre: 'Protocolar / Comunitario',
     hora: '7:30 am',
-    horaCal: '07:30',
     lugar: 'Principales calles de la ciudad',
     lugarTipo: 'externo',
     mapUrl: 'https://maps.google.com/?q=Plaza+de+Armas+Cajamarca',
@@ -235,6 +235,7 @@ const EVENTOS_TERESIANOS = [
   },
   {
     id: 'ev-23-juventud',
+    imagen: null,
     dia: '23',
     mes: 'Setiembre',
     fechaCompleta: '23 de Setiembre de 2026',
@@ -243,13 +244,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'secundaria',
     categoriaNombre: 'Vida Escolar',
     hora: '10:30 am',
-    horaCal: '10:30',
     lugar: 'Patio de secundaria',
     lugarTipo: 'colegio',
     descripcion: 'Jornada recreativa y juvenil celebrando la vitalidad de la juventud teresiana.'
   },
   {
     id: 'ev-23-iluminacion',
+    imagen: null,
     dia: '23',
     mes: 'Setiembre',
     fechaCompleta: '23 de Setiembre de 2026',
@@ -258,7 +259,6 @@ const EVENTOS_TERESIANOS = [
     categoria: 'protocolar',
     categoriaNombre: 'Tradición Institucional',
     hora: '7:00 pm',
-    horaCal: '19:00',
     lugar: 'Colina Urubamba chico',
     lugarTipo: 'externo',
     mapUrl: 'https://maps.google.com/?q=Colina+Urubamba+Cajamarca',
@@ -266,6 +266,7 @@ const EVENTOS_TERESIANOS = [
   },
   {
     id: 'ev-24-noche-gala',
+    imagen: null,
     dia: '24',
     mes: 'Setiembre',
     fechaCompleta: '24 de Setiembre de 2026',
@@ -274,13 +275,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'juegos',
     categoriaNombre: 'Gala / Arte',
     hora: '6:00 pm',
-    horaCal: '18:00',
     lugar: 'Patio de secundaria',
     lugarTipo: 'colegio',
     descripcion: 'Noche cumbre de gala cultural, talento artístico y fraternidad teresiana.'
   },
   {
     id: 'ev-25-clase-recuerdo',
+    imagen: 'assets/images/eventos/clase_recuerdo.jpeg',
     dia: '25',
     mes: 'Setiembre',
     fechaCompleta: '25 de Setiembre de 2026',
@@ -289,13 +290,13 @@ const EVENTOS_TERESIANOS = [
     categoria: 'protocolar',
     categoriaNombre: 'Exalumnas / Protocolar',
     hora: '10:30 am',
-    horaCal: '10:30',
     lugar: 'Aulas de la IE Santa Teresita',
     lugarTipo: 'colegio',
     descripcion: 'Momento de profunda emoción donde las promociones retornan a sus aulas de clase.'
   },
   {
     id: 'ev-26-desfile',
+    imagen: null,
     dia: '26',
     mes: 'Setiembre',
     fechaCompleta: '26 de Setiembre de 2026',
@@ -304,7 +305,6 @@ const EVENTOS_TERESIANOS = [
     categoria: 'protocolar',
     categoriaNombre: 'Acto Central',
     hora: '8:00 am',
-    horaCal: '08:00',
     lugar: 'Plaza de Armas de Cajamarca',
     lugarTipo: 'externo',
     mapUrl: 'https://maps.google.com/?q=Plaza+de+Armas+de+Cajamarca',
@@ -312,6 +312,7 @@ const EVENTOS_TERESIANOS = [
   },
   {
     id: 'ev-26-almuerzo',
+    imagen: 'assets/images/eventos/fiesta_teresiana.jpeg',
     dia: '26',
     mes: 'Setiembre',
     fechaCompleta: '26 de Setiembre de 2026',
@@ -320,7 +321,6 @@ const EVENTOS_TERESIANOS = [
     categoria: 'protocolar',
     categoriaNombre: 'Confraternidad',
     hora: '1:00 pm',
-    horaCal: '13:00',
     lugar: 'Zarco Campestre, Cajamarca',
     lugarTipo: 'externo',
     mapUrl: 'https://maps.google.com/?q=Zarco+Campestre+Cajamarca',
@@ -534,7 +534,6 @@ function initAgenda() {
     }
 
     eventsContainer.innerHTML = filtered.map(ev => {
-      const calUrl = generateGoogleCalendarUrl(ev);
       const mapBtn = ev.mapUrl ? `
         <a href="${ev.mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-map" title="Ver en Google Maps">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -561,10 +560,10 @@ function initAgenda() {
             </div>
           </div>
           <div class="event-actions">
-            <a href="${calUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-cal" title="Añadir a mi Google Calendar">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><line x1="12" x2="12" y1="14" y2="18"/><line x1="10" x2="14" y1="16" y2="16"/></svg>
-              <span>Agendar</span>
-            </a>
+            <button type="button" class="btn-card-action btn-card-photo" onclick="mostrarFotoEvento('${ev.id}')" title="Ver fotografía o imagen referencial de esta actividad">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+              <span>Ver Foto</span>
+            </button>
             ${mapBtn}
           </div>
         </article>
@@ -604,21 +603,59 @@ function initAgenda() {
   renderEvents();
 }
 
-/* Generador de URL para Google Calendar */
-function generateGoogleCalendarUrl(ev) {
-  const year = '2026';
-  const month = '09';
-  const day = ev.dia.padStart(2, '0');
-  const time = (ev.horaCal || '08:00').replace(':', '');
-  const startIso = `${year}${month}${day}T${time}00`;
-  const endIso = `${year}${month}${day}T${(parseInt(time.substring(0, 2), 10) + 2).toString().padStart(2, '0')}${time.substring(2)}00`;
+/* --------------------------------------------------------------------------
+   FUNCIÓN: MOSTRAR MODAL DE FOTOGRAFÍA / AFICHE REFERENCIAL DE LA ACTIVIDAD
+   -------------------------------------------------------------------------- */
+window.mostrarFotoEvento = function(id) {
+  const ev = EVENTOS_TERESIANOS.find(item => item.id === id);
+  if (!ev) return;
 
-  const title = encodeURIComponent(`${ev.titulo} - 91° Aniv. Santa Teresita`);
-  const details = encodeURIComponent(`${ev.subtitulo || ''}\n${ev.descripcion}\n\nI.E.E. Santa Teresita - Cajamarca`);
-  const location = encodeURIComponent(`${ev.lugar}, Cajamarca, Perú`);
+  const modal = document.getElementById('modal-evento-foto');
+  const badge = document.getElementById('modal-foto-badge');
+  const titulo = document.getElementById('modal-foto-titulo');
+  const subtitulo = document.getElementById('modal-foto-subtitulo');
+  const content = document.getElementById('modal-foto-content');
+  const detalles = document.getElementById('modal-foto-detalles');
 
-  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startIso}/${endIso}&details=${details}&location=${location}`;
-}
+  if (!modal) return;
+
+  badge.textContent = `${ev.dia} ${ev.mes} • ${ev.categoriaNombre}`;
+  titulo.textContent = ev.titulo;
+  subtitulo.textContent = ev.subtitulo || '';
+
+  detalles.innerHTML = `
+    <span><strong>Hora:</strong> ${ev.hora}</span>
+    <span><strong>Lugar:</strong> ${ev.lugar}</span>
+  `;
+
+  if (ev.imagen) {
+    content.innerHTML = `
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
+        <img src="${ev.imagen}" class="modal-foto-img" alt="${ev.titulo}" onclick="openZoomModal('${ev.imagen}')" style="cursor: zoom-in;" title="Clic para ver en tamaño completo">
+        <p style="color: #cbd5e1; font-size: 0.85rem; max-width: 440px; margin: 0 auto; line-height: 1.45;">
+          ${ev.descripcion}
+        </p>
+      </div>
+    `;
+  } else {
+    content.innerHTML = `
+      <div class="modal-placeholder-box">
+        <div class="modal-placeholder-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+        </div>
+        <h4 style="color: #ffffff; font-size: 1.05rem; font-weight: 700;">Fotografía / Afiche Referencial</h4>
+        <p style="color: #cbd5e1; font-size: 0.86rem; max-width: 380px; line-height: 1.45;">
+          ${ev.descripcion}
+        </p>
+        <div style="background: rgba(207, 168, 59, 0.12); border: 1px solid rgba(207, 168, 59, 0.3); border-radius: 9999px; padding: 0.35rem 0.85rem; color: #f7df8b; font-size: 0.78rem; font-weight: 500;">
+          📌 Imagen en proceso de asignación por la comisión institucional
+        </div>
+      </div>
+    `;
+  }
+
+  modal.classList.add('active');
+};
 
 /* --------------------------------------------------------------------------
    3. SECCIÓN JUEGOS FLORALES (SECUNDARIA Y PRIMARIA)
