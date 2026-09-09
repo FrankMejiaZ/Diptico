@@ -200,7 +200,9 @@ const EVENTOS_TERESIANOS = [
     lugar: 'Salida de la IE hacia La Catedral',
     lugarTipo: 'externo',
     mapUrl: 'https://maps.google.com/?q=Catedral+de+Cajamarca',
+    mapBtnText: 'Ver Catedral en Google Maps',
     tieneRecorrido: true,
+    recorridoBadge: '22 DE SETIEMBRE • RUTA PROCESIONAL',
     recorridoTitulo: 'Procesión en Honor a Santa Teresita',
     recorridoDesc: 'Ruta procesional solemne desde las instalaciones de la I.E.E. Santa Teresita por las calles históricas de Cajamarca hacia la Iglesia La Catedral.',
     descripcion: 'Traslado procesional solemne de la imagen de Santa Teresita del Niño Jesús.'
@@ -219,7 +221,9 @@ const EVENTOS_TERESIANOS = [
     lugar: 'Iglesia La Catedral de Cajamarca',
     lugarTipo: 'externo',
     mapUrl: 'https://maps.google.com/?q=Catedral+de+Cajamarca',
+    mapBtnText: 'Ver Catedral en Google Maps',
     tieneRecorrido: true,
+    recorridoBadge: '22 DE SETIEMBRE • SANTA MISA CENTRAL',
     recorridoTitulo: 'Eucaristía en Honor a Santa Teresita',
     recorridoDesc: 'Llegada del recorrido procesional y celebración de la Santa Misa Central en la Iglesia La Catedral de Cajamarca.',
     descripcion: 'Misa solemne con asistencia de autoridades, directivos, docentes, estudiantes y exalumnas.'
@@ -238,6 +242,11 @@ const EVENTOS_TERESIANOS = [
     lugar: 'Principales calles de la ciudad',
     lugarTipo: 'externo',
     mapUrl: 'https://maps.google.com/?q=Plaza+de+Armas+Cajamarca',
+    mapBtnText: 'Ver Plaza de Armas en Google Maps',
+    tieneRecorrido: true,
+    recorridoBadge: '23 DE SETIEMBRE • PREGÓN INSTITUCIONAL',
+    recorridoTitulo: 'Pregón Institucional de Aniversario',
+    recorridoDesc: 'Alegre pasacalle y recorrido festivo por las principales calles de Cajamarca anunciando el 91° Aniversario de la I.E.E. Santa Teresita.',
     descripcion: 'Colorido y alegre pasacalle anunciando el nonagésimo primer aniversario.'
   },
   {
@@ -268,7 +277,6 @@ const EVENTOS_TERESIANOS = [
     hora: '7:00 pm',
     lugar: 'Colina Urubamba chico',
     lugarTipo: 'externo',
-    mapUrl: 'https://maps.google.com/?q=Colina+Urubamba+Cajamarca',
     descripcion: 'Emblemática iluminación nocturna de la insignia de la I.E.E. Santa Teresita.'
   },
   {
@@ -601,9 +609,6 @@ function initAgenda() {
 
     eventsContainer.innerHTML = filtered.map(ev => {
       const dateBadgeText = (ev.dias && ev.dias.length > 1) ? '17 al 22 SET' : `${ev.dia} ${ev.mes}`;
-      const lugarHtml = ev.mapUrl 
-        ? `${ev.lugar} <a href="${ev.mapUrl}" target="_blank" rel="noopener noreferrer" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 2px; font-weight: 500; font-size: 0.82rem; margin-left: 0.25rem;" title="Abrir en Google Maps">(Ver mapa ↗)</a>`
-        : ev.lugar;
 
       const recorridoBtn = ev.tieneRecorrido ? `
         <button type="button" class="btn-recorrido" onclick="abrirModalRecorrido('${ev.id}')" title="Ver recorrido interactivo de esta actividad">
@@ -631,7 +636,7 @@ function initAgenda() {
             </div>
             <div class="event-detail-item">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span><strong>Lugar:</strong> ${lugarHtml}</span>
+              <span><strong>Lugar:</strong> ${ev.lugar}</span>
             </div>
           </div>
           ${recorridoBtn}
@@ -681,22 +686,33 @@ function initAgenda() {
 }
 
 /* --------------------------------------------------------------------------
-   FUNCIÓN: MOSTRAR MODAL DE RECORRIDO INTERACTIVO (PROCESIÓN Y EUCARISTÍA)
+   FUNCIÓN: MOSTRAR MODAL DE RECORRIDO INTERACTIVO (PROCESIÓN, EUCARISTÍA Y PREGÓN)
    -------------------------------------------------------------------------- */
 window.abrirModalRecorrido = function(id) {
   const ev = EVENTOS_TERESIANOS.find(item => item.id === id);
   if (!ev) return;
 
   const modal = document.getElementById('modal-recorrido');
+  const badge = document.getElementById('modal-recorrido-badge');
   const titulo = document.getElementById('modal-recorrido-titulo');
   const desc = document.getElementById('modal-recorrido-desc');
   const mapsBtn = document.getElementById('modal-recorrido-maps-btn');
 
   if (!modal) return;
 
+  if (badge) badge.textContent = ev.recorridoBadge || `${ev.dia} DE SETIEMBRE • RECORRIDO OFICIAL`;
   if (titulo) titulo.textContent = ev.recorridoTitulo || ev.titulo;
   if (desc) desc.textContent = ev.recorridoDesc || ev.descripcion;
-  if (mapsBtn && ev.mapUrl) mapsBtn.href = ev.mapUrl;
+  if (mapsBtn) {
+    if (ev.mapUrl) {
+      mapsBtn.href = ev.mapUrl;
+      mapsBtn.style.display = 'inline-flex';
+      const span = mapsBtn.querySelector('span');
+      if (span) span.textContent = ev.mapBtnText || 'Ver en Google Maps';
+    } else {
+      mapsBtn.style.display = 'none';
+    }
+  }
 
   modal.classList.add('active');
 };
