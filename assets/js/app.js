@@ -534,6 +534,43 @@ function initAgenda() {
   if (!eventsContainer) return;
 
   function renderEvents() {
+    // Si se seleccionó la píldora "Saludo Directora" en el carrusel de fechas
+    if (activeDate === 'directora') {
+      eventsContainer.innerHTML = `
+        <div class="directora-parchment" style="grid-column: 1 / -1; margin: 0 auto; max-width: 820px; width: 100%;">
+          <div class="directora-header">
+            <span class="section-tag" style="color: #99781a;">Mensaje Institucional</span>
+            <h2 class="directora-presentacion-title">Presentación</h2>
+          </div>
+
+          <div class="directora-body">
+            <p>
+              <strong>¡Estimada Comunidad Educativa Santa Teresita, apreciadas Exalumnas y entrañable Región de Cajamarca!</strong> Me llena de regocijo estrechar un afectuoso saludo, con ocasión de celebrar el nonagésimo primer año de vida institucional. Celebramos 91 años, educando con excelencia a la niñez y juventud cajamarquina, consolidándonos como un faro vivo de luz, dignidad y esperanza que ilumina a toda nuestra región.
+            </p>
+
+            <p>
+              Nacida para guiar la educación femenina, la <strong>I.E.E. Santa Teresita</strong> forma a las líderes de nuestra sociedad. Frente a los desafíos de hoy, respondemos con pedagogía contemporánea e innovadora, preparando ciudadanas críticas, éticas y competentes para los desafíos del siglo XXI.
+            </p>
+
+            <p>
+              Renovamos el compromiso sagrado de evangelizar desde la cultura, los valores y la fe. Trascendemos la simple instrucción para ofrecer un aprendizaje integral donde la fe se vive, la ciencia se descubre y los valores guían el pensamiento y la vida de las nuevas generaciones.
+            </p>
+
+            <p>
+              Agradecemos a Dios y a nuestra patrona, <strong>Santa Teresita del Niño Jesús</strong>, por sostener nuestra labor. Este proyecto triunfa gracias a la alianza con los padres de familia y a la responsabilidad de nuestras estudiantes. ¡Que la bendición divina nos acompañe para seguir educando con ciencia, virtud y acción!
+            </p>
+          </div>
+
+          <div class="directora-closing">
+            <p class="directora-bendicion">¡¡¡ Feliz y bendecido 91 Aniversario Institucional !!!</p>
+            <div class="directora-firma">Sor Margarita Castilla Félix</div>
+            <div class="directora-cargo">DIRECTORA</div>
+          </div>
+        </div>
+      `;
+      return;
+    }
+
     const filtered = EVENTOS_TERESIANOS.filter(ev => {
       // Filtro de Fecha: admite eventos multidía como Copa ST Ex Alumnas (del 17 al 22)
       const matchDate = activeDate === 'all' || (ev.dias ? ev.dias.includes(activeDate) : ev.dia === activeDate);
@@ -612,6 +649,10 @@ function initAgenda() {
       categoryChips.forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       activeCategory = chip.dataset.category;
+      if (activeDate === 'directora') {
+        activeDate = 'all';
+        datePills.forEach(p => p.classList.toggle('active', p.dataset.date === 'all'));
+      }
       renderEvents();
     });
   });
@@ -620,6 +661,10 @@ function initAgenda() {
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
       searchQuery = e.target.value.trim();
+      if (searchQuery && activeDate === 'directora') {
+        activeDate = 'all';
+        datePills.forEach(p => p.classList.toggle('active', p.dataset.date === 'all'));
+      }
       renderEvents();
     });
   }
@@ -855,13 +900,12 @@ function initShareFeatures() {
     });
   }
 
-  // View Switcher (Díptico vs Agenda vs Juegos Florales vs Discurso)
+  // View Switcher (Programa Oficial vs Juegos Florales vs Díptico 3D)
   const navPills = document.querySelectorAll('.switcher-btn');
   const sections = {
-    'diptico': document.getElementById('sec-diptico'),
     'agenda': document.getElementById('sec-agenda'),
     'juegos': document.getElementById('sec-juegos'),
-    'directora': document.getElementById('sec-directora')
+    'diptico': document.getElementById('sec-diptico')
   };
 
   navPills.forEach(pill => {
@@ -872,16 +916,12 @@ function initShareFeatures() {
 
       Object.keys(sections).forEach(key => {
         if (sections[key]) {
-          if (target === 'all') {
-            sections[key].style.display = 'block';
-          } else {
-            sections[key].style.display = key === target ? 'block' : 'none';
-          }
+          sections[key].style.display = key === target ? 'block' : 'none';
         }
       });
 
       // Si se selecciona una sección específica, hacer scroll suave hacia ella
-      if (target !== 'all' && sections[target]) {
+      if (sections[target]) {
         sections[target].scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
