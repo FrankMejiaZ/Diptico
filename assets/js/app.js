@@ -114,16 +114,17 @@ const EVENTOS_TERESIANOS = [
     id: 'ev-17-copa-exalumnas',
     imagen: null,
     dia: '17',
+    dias: ['17', '18', '21', '22'],
     mes: 'Setiembre',
     fechaCompleta: 'Del 17 al 22 de Setiembre de 2026',
     titulo: 'COPA "ST EX ALUMNAS" (Vóley y Básquet)',
-    subtitulo: 'Reencuentro de confraternidad deportiva de promociones',
+    subtitulo: 'Reencuentro de confraternidad deportiva de promociones (Del 17 al 22 de Setiembre)',
     categoria: 'deportes',
     categoriaNombre: 'Deportes / Exalumnas',
     hora: '5:30 pm',
     lugar: 'Coliseo de la IE',
     lugarTipo: 'colegio',
-    descripcion: 'Torneo de vóley y básquetbol entre promociones de exalumnas teresianas.'
+    descripcion: 'Torneo de vóley y básquetbol entre promociones de exalumnas teresianas. Se juega del 17 al 22 de Setiembre a las 5:30 pm en el Coliseo de la IE.'
   },
   {
     id: 'ev-18-deporte',
@@ -419,17 +420,20 @@ document.addEventListener('DOMContentLoaded', () => {
 /* --------------------------------------------------------------------------
    1. CONTROL DEL DÍPTICO 3D INTERACTIVO
    -------------------------------------------------------------------------- */
-let currentBookState = 'open'; // 'open', 'cover', 'back', 'exterior', 'interior'
+let currentBookState = 'cover'; // Inicia en Portada (Cara 1) como en la vida real
 
 function initDiptico3D() {
+  const leftPageEl = document.getElementById('book-page-left');
+  const rightPageEl = document.getElementById('book-page-right');
   const leftPageImg = document.getElementById('book-page-left-img');
   const rightPageImg = document.getElementById('book-page-right-img');
   const leftZoomBtn = document.getElementById('zoom-btn-left');
   const rightZoomBtn = document.getElementById('zoom-btn-right');
+  const spineShadow = document.querySelector('.spine-shadow');
   const bookContainer = document.getElementById('diptico-book-container');
   const statusLabel = document.getElementById('diptico-state-label');
 
-  if (!leftPageImg || !rightPageImg) return;
+  if (!leftPageImg || !rightPageImg || !bookContainer) return;
 
   const btnPortada = document.getElementById('btn-view-portada');
   const btnAbierto = document.getElementById('btn-view-abierto');
@@ -441,32 +445,51 @@ function initDiptico3D() {
     // Resetear estados activos en botones de control
     [btnPortada, btnAbierto, btnContraportada].forEach(btn => btn && btn.classList.remove('active'));
 
-    if (state === 'open') {
-      // Interior desplegado (Presentación y Juegos Florales)
+    if (state === 'cover') {
+      // 1. Portada (Cara 1): Frente cerrado
+      bookContainer.classList.add('is-single-page');
+      if (leftPageEl) leftPageEl.style.display = 'none';
+      if (spineShadow) spineShadow.style.display = 'none';
+      if (rightPageEl) rightPageEl.style.display = 'block';
+
+      rightPageImg.src = 'assets/images/panel_portada.webp';
+      rightPageImg.alt = 'Cara 1: Portada Oficial - 91 Años Santa Teresita';
+      rightZoomBtn.dataset.img = 'assets/images/panel_portada.png';
+
+      if (btnPortada) btnPortada.classList.add('active');
+      if (statusLabel) statusLabel.textContent = 'Cara 1: Portada Oficial — 91° Aniversario I.E.E. Santa Teresita';
+
+    } else if (state === 'open') {
+      // 2. Interior Desplegado: Caras 2 y 3
+      bookContainer.classList.remove('is-single-page');
+      if (leftPageEl) leftPageEl.style.display = 'block';
+      if (rightPageEl) rightPageEl.style.display = 'block';
+      if (spineShadow) spineShadow.style.display = window.innerWidth > 960 ? 'block' : 'none';
+
       leftPageImg.src = 'assets/images/panel_interior_izq.webp';
+      leftPageImg.alt = 'Cara 2: Presentación Sor Margarita y actividades iniciales';
       rightPageImg.src = 'assets/images/panel_interior_der.webp';
-      leftPageImg.alt = 'Interior Izquierdo - Presentación Sor Margarita';
-      rightPageImg.alt = 'Interior Derecho - Juegos Florales';
+      rightPageImg.alt = 'Cara 3: Juegos Florales y actividades hasta el 24 de Setiembre';
+
       leftZoomBtn.dataset.img = 'assets/images/panel_interior_izq.png';
       rightZoomBtn.dataset.img = 'assets/images/panel_interior_der.png';
+
       if (btnAbierto) btnAbierto.classList.add('active');
-      if (statusLabel) statusLabel.textContent = 'Interior Desplegado: Saludo Institucional y Programa de Actividades';
-    } else if (state === 'cover') {
-      // Vista frontal: Portada
-      leftPageImg.src = 'assets/images/panel_contraportada.webp';
-      rightPageImg.src = 'assets/images/panel_portada.webp';
-      leftPageImg.alt = 'Contraportada - Fechas Centrales 25 y 26';
-      rightPageImg.alt = 'Portada Oficial - 91 Años Santa Teresita';
-      leftZoomBtn.dataset.img = 'assets/images/panel_contraportada.png';
-      rightZoomBtn.dataset.img = 'assets/images/panel_portada.png';
-      if (btnPortada) btnPortada.classList.add('active');
-      if (statusLabel) statusLabel.textContent = 'Portada Conmemorativa: 91° Aniversario I.E.E. Santa Teresita';
+      if (statusLabel) statusLabel.textContent = 'Caras 2 y 3: Interior Desplegado — Presentación y Actividades hasta el 24 de Setiembre';
+
     } else if (state === 'back') {
-      // Contraportada ampliada
-      leftPageImg.src = 'assets/images/panel_contraportada.webp';
-      rightPageImg.src = 'assets/images/panel_portada.webp';
+      // 3. Contraportada (Cara 4): Última cara con 25 y 26 Setiembre
+      bookContainer.classList.add('is-single-page');
+      if (leftPageEl) leftPageEl.style.display = 'none';
+      if (spineShadow) spineShadow.style.display = 'none';
+      if (rightPageEl) rightPageEl.style.display = 'block';
+
+      rightPageImg.src = 'assets/images/panel_contraportada.webp';
+      rightPageImg.alt = 'Cara 4: Contraportada — Actos Centrales 25 y 26 de Setiembre';
+      rightZoomBtn.dataset.img = 'assets/images/panel_contraportada.png';
+
       if (btnContraportada) btnContraportada.classList.add('active');
-      if (statusLabel) statusLabel.textContent = 'Contraportada: Clase del Recuerdo, Desfile Central y Almuerzo';
+      if (statusLabel) statusLabel.textContent = 'Cara 4: Contraportada (Última Cara) — Clase del Recuerdo, Desfile Central y Almuerzo';
     }
 
     // Efecto de transición suave en 3D
@@ -477,8 +500,8 @@ function initDiptico3D() {
   }
 
   // Event listeners para botones de vista 3D
-  if (btnAbierto) btnAbierto.addEventListener('click', () => updateBookView('open'));
   if (btnPortada) btnPortada.addEventListener('click', () => updateBookView('cover'));
+  if (btnAbierto) btnAbierto.addEventListener('click', () => updateBookView('open'));
   if (btnContraportada) btnContraportada.addEventListener('click', () => updateBookView('back'));
 
   // Clic en los botones de zoom del díptico
@@ -491,8 +514,8 @@ function initDiptico3D() {
     }
   });
 
-  // Vista inicial
-  updateBookView('open');
+  // Vista inicial en Portada (Cara 1)
+  updateBookView('cover');
 }
 
 /* --------------------------------------------------------------------------
@@ -512,8 +535,8 @@ function initAgenda() {
 
   function renderEvents() {
     const filtered = EVENTOS_TERESIANOS.filter(ev => {
-      // Filtro de Fecha
-      const matchDate = activeDate === 'all' || ev.dia === activeDate;
+      // Filtro de Fecha: admite eventos multidía como Copa ST Ex Alumnas (del 17 al 22)
+      const matchDate = activeDate === 'all' || (ev.dias ? ev.dias.includes(activeDate) : ev.dia === activeDate);
       // Filtro de Categoría
       const matchCat = activeCategory === 'all' || ev.categoria === activeCategory;
       // Búsqueda por texto
@@ -541,10 +564,12 @@ function initAgenda() {
         </a>
       ` : '';
 
+      const dateBadgeText = (ev.dias && ev.dias.length > 1) ? '17 al 22 SET' : `${ev.dia} ${ev.mes}`;
+
       return `
         <article class="event-card">
           <div class="event-card-header">
-            <span class="event-date-badge">${ev.dia} ${ev.mes}</span>
+            <span class="event-date-badge">${dateBadgeText}</span>
             <span class="event-category-badge">${ev.categoriaNombre}</span>
           </div>
           <h3 class="event-title">${ev.titulo}</h3>

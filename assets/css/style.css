@@ -294,6 +294,18 @@ body {
   background: #0b233a;
 }
 
+/* Modo página individual (Cara 1 Portada o Cara 4 Contraportada) */
+.diptico-book.is-single-page {
+  max-width: 440px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.diptico-book.is-single-page .page-right {
+  border-radius: 12px !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(207, 168, 59, 0.25);
+}
+
 /* Paneles del Díptico */
 .diptico-page {
   position: relative;
