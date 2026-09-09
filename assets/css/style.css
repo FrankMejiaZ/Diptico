@@ -532,7 +532,9 @@ body {
 .date-pill-directora {
   border-color: rgba(207, 168, 59, 0.45);
   background: rgba(207, 168, 59, 0.12);
-  min-width: 82px;
+  min-width: 96px;
+  justify-content: center;
+  padding: 0.6rem 0.85rem;
 }
 
 .date-pill-directora:hover {
@@ -544,10 +546,6 @@ body {
   background: linear-gradient(135deg, var(--c-gold), #b8860b);
   color: #06182c;
   border-color: var(--c-gold-light);
-}
-
-.date-pill-directora.active .date-pill-month {
-  color: #06182c !important;
 }
 
 /* Filtros por Categoría & Buscador */
