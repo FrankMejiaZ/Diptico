@@ -210,59 +210,101 @@
     </section>
 
     <!-- ====================================================================
-         SECCIÓN 3: DÍPTICO 3D DESPLEGABLE
+         SECCIÓN 3: DÍPTICO 3D DESPLEGABLE (Folleto Virtual Interactivo)
          ==================================================================== -->
     <section id="sec-diptico" class="diptico-stage" style="display: none;">
       
-      <!-- Indicador de Estado -->
+      <!-- Indicador de Estado e Instrucción -->
       <div class="diptico-instructions">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></svg>
-        <span id="diptico-state-label">Interior Desplegado: Saludo Institucional y Programa de Actividades</span>
+        <span id="diptico-state-label">Arrastra las esquinas o pulsa las flechas para hojear el díptico en 3D</span>
       </div>
 
-      <!-- Contenedor del Folleto / Díptico 3D -->
-      <div class="book-perspective-wrap">
-        <div id="diptico-book-container" class="diptico-book">
+      <!-- Contenedor Exterior con Flechas de Navegación -->
+      <div class="flipbook-outer-wrapper">
+        <button class="flip-nav-arrow arrow-prev" id="btn-flip-prev" title="Página anterior" aria-label="Página anterior">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+
+        <!-- Contenedor Principal de StPageFlip -->
+        <div id="diptico-flipbook" class="diptico-flipbook">
           
-          <!-- Cara Izquierda (Interior Izquierdo o Contraportada según estado) -->
-          <div class="diptico-page page-left" id="book-page-left">
-            <img id="book-page-left-img" src="assets/images/panel_interior_izq.webp" alt="Interior Izquierdo">
-            <button class="zoom-hint-btn" id="zoom-btn-left" data-img="assets/images/panel_interior_izq.png" title="Ampliar en Alta Definición">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="8"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
-              <span>Ver HD</span>
-            </button>
+          <!-- Página 0 / Cara 1: Portada Exterior -->
+          <div class="page-item" data-density="hard">
+            <div class="page-content">
+              <img src="assets/images/panel_portada.webp" alt="Cara 1: Portada Oficial — 91 Años Santa Teresita" class="page-img">
+              <button class="zoom-hint-btn" data-img="assets/images/panel_portada.png" title="Ampliar Portada en Alta Definición">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="8"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+                <span>Ver HD</span>
+              </button>
+            </div>
           </div>
 
-          <!-- Sombra del Lomo Central (Spine) -->
-          <div class="spine-shadow"></div>
+          <!-- Página 1 / Cara 2: Interior Izquierdo -->
+          <div class="page-item">
+            <div class="page-content">
+              <img src="assets/images/panel_interior_izq.webp" alt="Cara 2: Presentación Sor Margarita y actividades iniciales" class="page-img">
+              <button class="zoom-hint-btn" data-img="assets/images/panel_interior_izq.png" title="Ampliar Interior Izquierdo en Alta Definición">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="8"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+                <span>Ver HD</span>
+              </button>
+            </div>
+          </div>
 
-          <!-- Cara Derecha (Interior Derecho o Portada según estado) -->
-          <div class="diptico-page page-right" id="book-page-right">
-            <img id="book-page-right-img" src="assets/images/panel_interior_der.webp" alt="Interior Derecho">
-            <button class="zoom-hint-btn" id="zoom-btn-right" data-img="assets/images/panel_interior_der.png" title="Ampliar en Alta Definición">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="8"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
-              <span>Ver HD</span>
-            </button>
+          <!-- Página 2 / Cara 3: Interior Derecho -->
+          <div class="page-item">
+            <div class="page-content">
+              <img src="assets/images/panel_interior_der.webp" alt="Cara 3: Juegos Florales y actividades hasta el 24 de Setiembre" class="page-img">
+              <button class="zoom-hint-btn" data-img="assets/images/panel_interior_der.png" title="Ampliar Interior Derecho en Alta Definición">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="8"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+                <span>Ver HD</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Página 3 / Cara 4: Contraportada Posterior -->
+          <div class="page-item" data-density="hard">
+            <div class="page-content">
+              <img src="assets/images/panel_contraportada.webp" alt="Cara 4: Contraportada — Actos Centrales 25 y 26 de Setiembre" class="page-img">
+              <button class="zoom-hint-btn" data-img="assets/images/panel_contraportada.png" title="Ampliar Contraportada en Alta Definición">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="8"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+                <span>Ver HD</span>
+              </button>
+            </div>
           </div>
 
         </div>
+
+        <button class="flip-nav-arrow arrow-next" id="btn-flip-next" title="Página siguiente" aria-label="Página siguiente">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
 
-      <!-- Controles Interactivos del Díptico en Orden Físico Real -->
+      <!-- Barra de Paginación Numérica -->
+      <div class="flip-pagination-bar">
+        <span class="flip-page-indicator" id="flip-page-indicator">Página 1 de 4</span>
+      </div>
+
+      <!-- Controles de Navegación Rápida a Caras Individuales y Láminas HD -->
       <div class="diptico-controls">
-        <button id="btn-view-portada" class="btn-ctrl active" title="Ver Cara 1 frontal">
+        <button id="btn-goto-p1" class="btn-ctrl active" title="Ir a Portada Oficial">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 6 4-6 4Z"/></svg>
           <span>1. Portada (Cara 1)</span>
         </button>
 
-        <button id="btn-view-abierto" class="btn-ctrl" title="Ver Caras 2 y 3 desplegadas">
+        <button id="btn-goto-p2" class="btn-ctrl" title="Ir a Interior Izquierdo">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          <span>2. Interior Desplegado (Caras 2 y 3)</span>
+          <span>2. Interior Izq. (Cara 2)</span>
         </button>
 
-        <button id="btn-view-contraportada" class="btn-ctrl" title="Ver Cara 4 posterior">
+        <button id="btn-goto-p3" class="btn-ctrl" title="Ir a Interior Derecho">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span>3. Interior Der. (Cara 3)</span>
+        </button>
+
+        <button id="btn-goto-p4" class="btn-ctrl" title="Ir a Contraportada">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 12h6M9 16h6"/></svg>
-          <span>3. Contraportada (Cara 4)</span>
+          <span>4. Contraportada (Cara 4)</span>
         </button>
 
         <button id="btn-zoom-page1" class="btn-ctrl" title="Ver Lámina Exterior completa en Alta Definición">
@@ -408,7 +450,8 @@
   <div id="toast-notification" class="toast-msg"></div>
 
   <!-- Scripts -->
-  <script src="assets/js/petals.js?v=4.4"></script>
-  <script src="assets/js/app.js?v=4.4"></script>
+  <script src="assets/js/page-flip.browser.js?v=5.0"></script>
+  <script src="assets/js/petals.js?v=5.0"></script>
+  <script src="assets/js/app.js?v=5.0"></script>
 </body>
 </html>

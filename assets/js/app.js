@@ -424,112 +424,185 @@ const ACTIVIDADES_PRIMARIA = [
 // CONTROLADOR PRINCIPAL DE LA APLICACIÓN
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
-  initDiptico3D();
   initAgenda();
   initJuegosFlorales();
   initModals();
   initShareFeatures();
+
+  // Si la sección del díptico está visible al cargar, inicializar el folleto
+  const secDiptico = document.getElementById('sec-diptico');
+  if (secDiptico && secDiptico.style.display !== 'none') {
+    setTimeout(initDipticoFlipbook, 60);
+  }
 });
 
 /* --------------------------------------------------------------------------
-   1. CONTROL DEL DÍPTICO 3D INTERACTIVO
+   1. CONTROL DEL DÍPTICO 3D INTERACTIVO (StPageFlip Virtual Folleto)
    -------------------------------------------------------------------------- */
-let currentBookState = 'cover'; // Inicia en Portada (Cara 1) como en la vida real
+let dipticoFlip = null;
 
-function initDiptico3D() {
-  const leftPageEl = document.getElementById('book-page-left');
-  const rightPageEl = document.getElementById('book-page-right');
-  const leftPageImg = document.getElementById('book-page-left-img');
-  const rightPageImg = document.getElementById('book-page-right-img');
-  const leftZoomBtn = document.getElementById('zoom-btn-left');
-  const rightZoomBtn = document.getElementById('zoom-btn-right');
-  const spineShadow = document.querySelector('.spine-shadow');
-  const bookContainer = document.getElementById('diptico-book-container');
-  const statusLabel = document.getElementById('diptico-state-label');
+function initDipticoFlipbook() {
+  const flipContainer = document.getElementById('diptico-flipbook');
+  if (!flipContainer) return;
 
-  if (!leftPageImg || !rightPageImg || !bookContainer) return;
-
-  const btnPortada = document.getElementById('btn-view-portada');
-  const btnAbierto = document.getElementById('btn-view-abierto');
-  const btnContraportada = document.getElementById('btn-view-contraportada');
-
-  function updateBookView(state) {
-    currentBookState = state;
-
-    // Resetear estados activos en botones de control
-    [btnPortada, btnAbierto, btnContraportada].forEach(btn => btn && btn.classList.remove('active'));
-
-    if (state === 'cover') {
-      // 1. Portada (Cara 1): Frente cerrado
-      bookContainer.classList.add('is-single-page');
-      if (leftPageEl) leftPageEl.style.display = 'none';
-      if (spineShadow) spineShadow.style.display = 'none';
-      if (rightPageEl) rightPageEl.style.display = 'block';
-
-      rightPageImg.src = 'assets/images/panel_portada.webp';
-      rightPageImg.alt = 'Cara 1: Portada Oficial - 91 Años Santa Teresita';
-      rightZoomBtn.dataset.img = 'assets/images/panel_portada.png';
-
-      if (btnPortada) btnPortada.classList.add('active');
-      if (statusLabel) statusLabel.textContent = 'Cara 1: Portada Oficial — 91° Aniversario I.E.E. Santa Teresita';
-
-    } else if (state === 'open') {
-      // 2. Interior Desplegado: Caras 2 y 3
-      bookContainer.classList.remove('is-single-page');
-      if (leftPageEl) leftPageEl.style.display = 'block';
-      if (rightPageEl) rightPageEl.style.display = 'block';
-      if (spineShadow) spineShadow.style.display = window.innerWidth > 960 ? 'block' : 'none';
-
-      leftPageImg.src = 'assets/images/panel_interior_izq.webp';
-      leftPageImg.alt = 'Cara 2: Presentación Sor Margarita y actividades iniciales';
-      rightPageImg.src = 'assets/images/panel_interior_der.webp';
-      rightPageImg.alt = 'Cara 3: Juegos Florales y actividades hasta el 24 de Setiembre';
-
-      leftZoomBtn.dataset.img = 'assets/images/panel_interior_izq.png';
-      rightZoomBtn.dataset.img = 'assets/images/panel_interior_der.png';
-
-      if (btnAbierto) btnAbierto.classList.add('active');
-      if (statusLabel) statusLabel.textContent = 'Caras 2 y 3: Interior Desplegado — Presentación y Actividades hasta el 24 de Setiembre';
-
-    } else if (state === 'back') {
-      // 3. Contraportada (Cara 4): Última cara con 25 y 26 Setiembre
-      bookContainer.classList.add('is-single-page');
-      if (leftPageEl) leftPageEl.style.display = 'none';
-      if (spineShadow) spineShadow.style.display = 'none';
-      if (rightPageEl) rightPageEl.style.display = 'block';
-
-      rightPageImg.src = 'assets/images/panel_contraportada.webp';
-      rightPageImg.alt = 'Cara 4: Contraportada — Actos Centrales 25 y 26 de Setiembre';
-      rightZoomBtn.dataset.img = 'assets/images/panel_contraportada.png';
-
-      if (btnContraportada) btnContraportada.classList.add('active');
-      if (statusLabel) statusLabel.textContent = 'Cara 4: Contraportada (Última Cara) — Clase del Recuerdo, Desfile Central y Almuerzo';
-    }
-
-    // Efecto de transición suave en 3D
-    bookContainer.style.transform = 'scale(0.98)';
-    setTimeout(() => {
-      bookContainer.style.transform = 'scale(1)';
-    }, 150);
+  if (typeof window.St === 'undefined' || !window.St.PageFlip) {
+    console.warn('Librería StPageFlip no disponible.');
+    return;
   }
 
-  // Event listeners para botones de vista 3D
-  if (btnPortada) btnPortada.addEventListener('click', () => updateBookView('cover'));
-  if (btnAbierto) btnAbierto.addEventListener('click', () => updateBookView('open'));
-  if (btnContraportada) btnContraportada.addEventListener('click', () => updateBookView('back'));
+  // Si ya fue creado, únicamente actualizamos dimensiones
+  if (dipticoFlip) {
+    dipticoFlip.update();
+    return;
+  }
 
-  // Clic en los botones de zoom del díptico
-  [leftZoomBtn, rightZoomBtn].forEach(btn => {
-    if (btn) {
+  try {
+    dipticoFlip = new window.St.PageFlip(flipContainer, {
+      width: 460,
+      height: 650,
+      size: "stretch",
+      minWidth: 260,
+      maxWidth: 520,
+      minHeight: 370,
+      maxHeight: 740,
+      maxShadowOpacity: 0.55,
+      showCover: true,
+      mobileScrollSupport: false,
+      usePortrait: true,
+      startPage: 0,
+      drawShadow: true,
+      flippingTime: 750,
+      useMouseEvents: true,
+      showPageCorners: true,
+      clickEventForward: true
+    });
+
+    const pageItems = flipContainer.querySelectorAll('.page-item');
+    dipticoFlip.loadFromHTML(pageItems);
+
+    // Flechas de navegación
+    const btnPrev = document.getElementById('btn-flip-prev');
+    const btnNext = document.getElementById('btn-flip-next');
+
+    if (btnPrev) {
+      btnPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dipticoFlip.flipPrev();
+      });
+    }
+
+    if (btnNext) {
+      btnNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dipticoFlip.flipNext();
+      });
+    }
+
+    // Botones de salto directo a cada una de las 4 caras
+    const btnP1 = document.getElementById('btn-goto-p1');
+    const btnP2 = document.getElementById('btn-goto-p2');
+    const btnP3 = document.getElementById('btn-goto-p3');
+    const btnP4 = document.getElementById('btn-goto-p4');
+
+    if (btnP1) btnP1.addEventListener('click', () => irAPaginaDiptico(0));
+    if (btnP2) btnP2.addEventListener('click', () => irAPaginaDiptico(1));
+    if (btnP3) btnP3.addEventListener('click', () => irAPaginaDiptico(2));
+    if (btnP4) btnP4.addEventListener('click', () => irAPaginaDiptico(3));
+
+    // Eventos de giro de página
+    dipticoFlip.on('flip', (e) => {
+      actualizarControlesFlipbook(e.data);
+    });
+
+    dipticoFlip.on('changeOrientation', () => {
+      if (dipticoFlip) {
+        actualizarControlesFlipbook(dipticoFlip.getCurrentPageIndex());
+      }
+    });
+
+    // Botones de zoom HD en cada página
+    flipContainer.querySelectorAll('.zoom-hint-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        openZoomModal(btn.dataset.img || btn.querySelector('img')?.src);
+        const imgPath = btn.dataset.img;
+        if (imgPath && typeof openZoomModal === 'function') {
+          openZoomModal(imgPath);
+        }
       });
+    });
+
+    // Actualizar indicador inicial
+    actualizarControlesFlipbook(0);
+
+    // Redimensión en cambio de ventana
+    window.addEventListener('resize', () => {
+      if (dipticoFlip && document.getElementById('sec-diptico').style.display !== 'none') {
+        dipticoFlip.update();
+      }
+    });
+
+  } catch (err) {
+    console.error('Error inicializando StPageFlip:', err);
+  }
+}
+
+function irAPaginaDiptico(pageIndex) {
+  if (!dipticoFlip) return;
+  try {
+    dipticoFlip.flip(pageIndex);
+  } catch (err) {
+    dipticoFlip.turnToPage(pageIndex);
+  }
+  actualizarControlesFlipbook(pageIndex);
+}
+
+function actualizarControlesFlipbook(pageIndex) {
+  const pageIndicator = document.getElementById('flip-page-indicator');
+  const statusLabel = document.getElementById('diptico-state-label');
+  const btnPills = [
+    document.getElementById('btn-goto-p1'),
+    document.getElementById('btn-goto-p2'),
+    document.getElementById('btn-goto-p3'),
+    document.getElementById('btn-goto-p4')
+  ];
+
+  // Marcar botón activo correspondiente
+  btnPills.forEach((btn, idx) => {
+    if (!btn) return;
+    if (idx === pageIndex) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
     }
   });
 
-  // Vista inicial en Portada (Cara 1)
-  updateBookView('cover');
+  const orientation = dipticoFlip ? dipticoFlip.getOrientation() : 'portrait';
+
+  // Textos explicativos en el orden real de un díptico plegado
+  const titulos = [
+    'Cara 1: Portada Oficial — 91° Aniversario I.E.E. Santa Teresita',
+    'Cara 2: Interior Izquierdo — Presentación Sor Margarita y actividades iniciales',
+    'Cara 3: Interior Derecho — Juegos Florales y actividades hasta el 24 de Setiembre',
+    'Cara 4: Contraportada (Última Cara) — Actos Centrales 25 y 26 de Setiembre'
+  ];
+
+  if (statusLabel) {
+    if (orientation === 'landscape' && (pageIndex === 1 || pageIndex === 2)) {
+      statusLabel.textContent = 'Caras 2 y 3: Interior Desplegado — Presentación y Actividades hasta el 24 de Setiembre';
+      if (btnPills[1]) btnPills[1].classList.add('active');
+      if (btnPills[2]) btnPills[2].classList.add('active');
+    } else {
+      statusLabel.textContent = titulos[pageIndex] || `Página ${pageIndex + 1}`;
+    }
+  }
+
+  if (pageIndicator) {
+    if (orientation === 'landscape' && (pageIndex === 1 || pageIndex === 2)) {
+      pageIndicator.textContent = 'Caras 2 y 3 de 4 (Interior Abierto)';
+    } else {
+      pageIndicator.textContent = `Página ${pageIndex + 1} de 4`;
+    }
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -910,6 +983,13 @@ function initShareFeatures() {
           sections[key].style.display = key === target ? 'block' : 'none';
         }
       });
+
+      // Si se selecciona Díptico 3D, asegurar que StPageFlip calcule dimensiones correctamente
+      if (target === 'diptico') {
+        setTimeout(() => {
+          initDipticoFlipbook();
+        }, 60);
+      }
 
       // Si se selecciona una sección específica, hacer scroll suave hacia ella
       if (sections[target]) {

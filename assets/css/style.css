@@ -273,92 +273,55 @@ body {
   text-align: center;
 }
 
-/* Contenedor con Perspectiva 3D */
-.book-perspective-wrap {
-  perspective: 2600px;
-  perspective-origin: 50% 50%;
-  width: 100%;
+/* Contenedor del Folleto Interactivo */
+.flipbook-outer-wrapper {
+  position: relative;
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 1rem 0 2rem 0;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  min-height: 520px;
+  padding: 0.5rem 0;
 }
 
-/* Díptico 3D Book Layout */
-.diptico-book {
-  display: flex;
+.diptico-flipbook {
   position: relative;
-  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-  transform-style: preserve-3d;
-  box-shadow: var(--shadow-book);
-  border-radius: 8px;
-  background: #0b233a;
-}
-
-/* Modo página individual (Cara 1 Portada o Cara 4 Contraportada) */
-.diptico-book.is-single-page {
-  max-width: 440px;
-  background: transparent;
-  box-shadow: none;
-}
-
-.diptico-book.is-single-page .page-right {
-  border-radius: 12px !important;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(207, 168, 59, 0.25);
-}
-
-/* Paneles del Díptico */
-.diptico-page {
-  position: relative;
-  width: 440px;
-  height: 622px; /* Proporción A5 (1:1.414) */
-  background: #ffffff;
+  margin: 0 auto;
+  box-shadow: 0 25px 50px -12px rgba(6, 24, 44, 0.55), 0 0 0 1px rgba(207, 168, 59, 0.2);
+  border-radius: 6px;
   overflow: hidden;
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
-  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.7s ease;
 }
 
-.diptico-page img {
+.page-item {
+  background-color: #ffffff;
+  overflow: hidden;
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.08);
+}
+
+.page-content {
+  position: relative;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+}
+
+.page-img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
   display: block;
   user-select: none;
   -webkit-user-drag: none;
 }
 
-/* Pliegue Central (Spine lighting effect) */
-.page-left {
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  box-shadow: inset -15px 0 25px -10px rgba(0, 0, 0, 0.35);
-}
-
-.page-right {
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  box-shadow: inset 15px 0 25px -10px rgba(0, 0, 0, 0.35);
-}
-
-.spine-shadow {
+.page-item .zoom-hint-btn {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 28px;
-  transform: translateX(-50%);
-  background: linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.05) 45%, rgba(255,255,255,0.1) 50%, rgba(0,0,0,0.05) 55%, rgba(0,0,0,0.3) 100%);
-  pointer-events: none;
-  z-index: 10;
-}
-
-/* Hover & Active Page Highlights */
-.diptico-page .zoom-hint-btn {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  background: rgba(6, 24, 44, 0.85);
+  bottom: 14px;
+  right: 14px;
+  background: rgba(6, 24, 44, 0.88);
   color: var(--c-gold-light);
-  border: 1px solid rgba(207, 168, 59, 0.4);
+  border: 1px solid rgba(207, 168, 59, 0.45);
   backdrop-filter: blur(8px);
   padding: 0.45rem 0.8rem;
   border-radius: 9999px;
@@ -373,11 +336,84 @@ body {
   z-index: 15;
 }
 
-.diptico-page:hover .zoom-hint-btn {
+.page-item:hover .zoom-hint-btn {
   opacity: 1;
   transform: scale(1.05);
   background: var(--c-navy-900);
   border-color: var(--c-gold);
+}
+
+/* Flechas de Navegación del Folleto */
+.flip-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(6, 24, 44, 0.85);
+  border: 1px solid rgba(207, 168, 59, 0.5);
+  color: var(--c-gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 25;
+  transition: var(--transition-smooth);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.flip-nav-arrow:hover {
+  background: linear-gradient(135deg, var(--c-gold), #b8860b);
+  color: #06182c;
+  border-color: var(--c-gold-light);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 8px 25px var(--c-gold-glow);
+}
+
+.flip-nav-arrow.arrow-prev {
+  left: 6px;
+}
+
+.flip-nav-arrow.arrow-next {
+  right: 6px;
+}
+
+@media (max-width: 680px) {
+  .flipbook-outer-wrapper {
+    min-height: 440px;
+    padding: 0.25rem 0;
+  }
+  .flip-nav-arrow {
+    width: 36px;
+    height: 36px;
+  }
+  .flip-nav-arrow.arrow-prev {
+    left: -4px;
+  }
+  .flip-nav-arrow.arrow-next {
+    right: -4px;
+  }
+}
+
+/* Barra de Paginación Numérica */
+.flip-pagination-bar {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flip-page-indicator {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(207, 168, 59, 0.35);
+  color: var(--c-gold-light);
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 /* Controles del Díptico */
