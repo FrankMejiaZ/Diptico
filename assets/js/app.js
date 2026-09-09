@@ -594,14 +594,10 @@ function initAgenda() {
     }
 
     eventsContainer.innerHTML = filtered.map(ev => {
-      const mapBtn = ev.mapUrl ? `
-        <a href="${ev.mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-action btn-card-map" title="Ver en Google Maps">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>Ubicación</span>
-        </a>
-      ` : '';
-
       const dateBadgeText = (ev.dias && ev.dias.length > 1) ? '17 al 22 SET' : `${ev.dia} ${ev.mes}`;
+      const lugarHtml = ev.mapUrl 
+        ? `${ev.lugar} <a href="${ev.mapUrl}" target="_blank" rel="noopener noreferrer" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 2px; font-weight: 500; font-size: 0.82rem; margin-left: 0.25rem;" title="Abrir en Google Maps">(Ver mapa ↗)</a>`
+        : ev.lugar;
 
       return `
         <article class="event-card">
@@ -618,15 +614,8 @@ function initAgenda() {
             </div>
             <div class="event-detail-item">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span><strong>Lugar:</strong> ${ev.lugar}</span>
+              <span><strong>Lugar:</strong> ${lugarHtml}</span>
             </div>
-          </div>
-          <div class="event-actions">
-            <button type="button" class="btn-card-action btn-card-photo" onclick="mostrarFotoEvento('${ev.id}')" title="Ver fotografía o imagen referencial de esta actividad">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-              <span>Ver Foto</span>
-            </button>
-            ${mapBtn}
           </div>
         </article>
       `;
@@ -673,59 +662,6 @@ function initAgenda() {
   renderEvents();
 }
 
-/* --------------------------------------------------------------------------
-   FUNCIÓN: MOSTRAR MODAL DE FOTOGRAFÍA / AFICHE REFERENCIAL DE LA ACTIVIDAD
-   -------------------------------------------------------------------------- */
-window.mostrarFotoEvento = function(id) {
-  const ev = EVENTOS_TERESIANOS.find(item => item.id === id);
-  if (!ev) return;
-
-  const modal = document.getElementById('modal-evento-foto');
-  const badge = document.getElementById('modal-foto-badge');
-  const titulo = document.getElementById('modal-foto-titulo');
-  const subtitulo = document.getElementById('modal-foto-subtitulo');
-  const content = document.getElementById('modal-foto-content');
-  const detalles = document.getElementById('modal-foto-detalles');
-
-  if (!modal) return;
-
-  badge.textContent = `${ev.dia} ${ev.mes} • ${ev.categoriaNombre}`;
-  titulo.textContent = ev.titulo;
-  subtitulo.textContent = ev.subtitulo || '';
-
-  detalles.innerHTML = `
-    <span><strong>Hora:</strong> ${ev.hora}</span>
-    <span><strong>Lugar:</strong> ${ev.lugar}</span>
-  `;
-
-  if (ev.imagen) {
-    content.innerHTML = `
-      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
-        <img src="${ev.imagen}" class="modal-foto-img" alt="${ev.titulo}" onclick="openZoomModal('${ev.imagen}')" style="cursor: zoom-in;" title="Clic para ver en tamaño completo">
-        <p style="color: #cbd5e1; font-size: 0.85rem; max-width: 440px; margin: 0 auto; line-height: 1.45;">
-          ${ev.descripcion}
-        </p>
-      </div>
-    `;
-  } else {
-    content.innerHTML = `
-      <div class="modal-placeholder-box">
-        <div class="modal-placeholder-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-        </div>
-        <h4 style="color: #ffffff; font-size: 1.05rem; font-weight: 700;">Fotografía / Afiche Referencial</h4>
-        <p style="color: #cbd5e1; font-size: 0.86rem; max-width: 380px; line-height: 1.45;">
-          ${ev.descripcion}
-        </p>
-        <div style="background: rgba(207, 168, 59, 0.12); border: 1px solid rgba(207, 168, 59, 0.3); border-radius: 9999px; padding: 0.35rem 0.85rem; color: #f7df8b; font-size: 0.78rem; font-weight: 500;">
-          📌 Imagen en proceso de asignación por la comisión institucional
-        </div>
-      </div>
-    `;
-  }
-
-  modal.classList.add('active');
-};
 
 /* --------------------------------------------------------------------------
    3. SECCIÓN JUEGOS FLORALES (SECUNDARIA Y PRIMARIA)

@@ -696,7 +696,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
-  margin-bottom: 1.1rem;
+  margin-bottom: 0;
   flex-grow: 1;
 }
 
@@ -711,83 +711,6 @@ body {
 .event-detail-item svg {
   color: var(--c-gold);
   flex-shrink: 0;
-}
-
-.event-actions {
-  display: flex;
-  gap: 0.5rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.btn-card-action {
-  flex: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--radius-md);
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-  text-decoration: none;
-}
-
-.btn-card-photo {
-  background: rgba(207, 168, 59, 0.15);
-  border: 1px solid rgba(207, 168, 59, 0.4);
-  color: var(--c-gold-light);
-}
-
-.btn-card-photo:hover {
-  background: linear-gradient(135deg, var(--c-gold), var(--c-gold-dark));
-  color: #06182c;
-  box-shadow: 0 4px 12px var(--c-gold-glow);
-}
-
-.modal-foto-img {
-  max-width: 100%;
-  max-height: 52vh;
-  object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(207, 168, 59, 0.3);
-}
-
-.modal-placeholder-box {
-  background: rgba(6, 24, 44, 0.7);
-  border: 2px dashed rgba(207, 168, 59, 0.35);
-  border-radius: 14px;
-  padding: 2.2rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.modal-placeholder-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: rgba(207, 168, 59, 0.15);
-  color: var(--c-gold-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0.25rem;
-}
-
-.btn-card-map {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #e2e8f0;
-}
-
-.btn-card-map:hover {
-  background: rgba(255, 255, 255, 0.14);
-  color: #ffffff;
 }
 
 /* ==========================================================================
