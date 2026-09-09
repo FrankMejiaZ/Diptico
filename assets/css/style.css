@@ -713,6 +713,46 @@ body {
   flex-shrink: 0;
 }
 
+/* Botón Especial: Recorrido Interactivo (Procesión y Eucaristía) */
+.btn-recorrido {
+  margin-top: 1.1rem;
+  padding: 0.65rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  background: linear-gradient(135deg, rgba(207, 168, 59, 0.16) 0%, rgba(27, 101, 173, 0.35) 100%);
+  border: 1px solid rgba(207, 168, 59, 0.45);
+  border-radius: var(--radius-md);
+  color: #f7df8b;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  width: 100%;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.02em;
+}
+
+.btn-recorrido svg {
+  color: var(--c-gold-light);
+  transition: transform 0.3s ease;
+}
+
+.btn-recorrido:hover {
+  background: linear-gradient(135deg, var(--c-gold), #b8860b);
+  color: #06182c;
+  border-color: var(--c-gold-light);
+  box-shadow: 0 6px 20px var(--c-gold-glow);
+  transform: translateY(-2px);
+}
+
+.btn-recorrido:hover svg {
+  color: #06182c;
+  transform: scale(1.15);
+}
+
 /* ==========================================================================
    SECCIÓN 3: JUEGOS FLORALES & DETALLE CURRICULAR
    ========================================================================== */

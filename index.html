@@ -18,7 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
   <!-- Estilos del Proyecto -->
-  <link rel="stylesheet" href="assets/css/style.css?v=4.2">
+  <link rel="stylesheet" href="assets/css/style.css?v=4.3">
 </head>
 <body>
 
@@ -298,6 +298,45 @@
   </footer>
 
   <!-- ====================================================================
+       MODAL: RECORRIDO INTERACTIVO (PROCESIÓN Y EUCARISTÍA - 22 SETIEMBRE)
+       ==================================================================== -->
+  <div id="modal-recorrido" class="modal-overlay">
+    <div class="modal-container" style="max-width: 540px; text-align: center;">
+      <button class="modal-close-btn" title="Cerrar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+      </button>
+
+      <div style="width: 58px; height: 58px; margin: 0.5rem auto 1rem; border-radius: 50%; background: rgba(207, 168, 59, 0.15); border: 1px solid rgba(207, 168, 59, 0.4); display: flex; align-items: center; justify-content: center; color: var(--c-gold-light);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+      </div>
+
+      <span class="event-date-badge" style="margin-bottom: 0.6rem; display: inline-block;">22 DE SETIEMBRE • RUTA PROCESIONAL</span>
+      <h3 id="modal-recorrido-titulo" style="color: #ffffff; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Recorrido Interactivo</h3>
+      
+      <p id="modal-recorrido-desc" style="color: #cbd5e1; font-size: 0.88rem; line-height: 1.5; margin-bottom: 1.25rem;">
+        Ruta procesional solemne desde las instalaciones de la I.E.E. Santa Teresita por las calles históricas de Cajamarca hacia la Iglesia La Catedral.
+      </p>
+
+      <div style="background: rgba(6, 24, 44, 0.8); border: 1px dashed rgba(207, 168, 59, 0.4); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: #f7df8b; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.35rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>En proceso de integración interactiva</span>
+        </div>
+        <p style="color: #94a3b8; font-size: 0.8rem; margin: 0; line-height: 1.4;">
+          El trazado digital y recorrido interactivo oficial se vinculará en este apartado una vez culminado su diseño.
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 0.6rem; justify-content: center;">
+        <a id="modal-recorrido-maps-btn" href="https://maps.google.com/?q=Catedral+de+Cajamarca" target="_blank" rel="noopener noreferrer" class="btn-ctrl" style="background: var(--c-blue-teresiano); color: #ffffff; border: none; font-size: 0.85rem; font-weight: 600;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Ver Catedral en Google Maps</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
        MODAL 1: ZOOM EN ALTA RESOLUCIÓN DE LÁMINAS
        ==================================================================== -->
   <div id="modal-zoom" class="modal-overlay">
@@ -369,7 +408,7 @@
   <div id="toast-notification" class="toast-msg"></div>
 
   <!-- Scripts -->
-  <script src="assets/js/petals.js?v=4.2"></script>
-  <script src="assets/js/app.js?v=4.2"></script>
+  <script src="assets/js/petals.js?v=4.3"></script>
+  <script src="assets/js/app.js?v=4.3"></script>
 </body>
 </html>

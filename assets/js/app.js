@@ -200,6 +200,9 @@ const EVENTOS_TERESIANOS = [
     lugar: 'Salida de la IE hacia La Catedral',
     lugarTipo: 'externo',
     mapUrl: 'https://maps.google.com/?q=Catedral+de+Cajamarca',
+    tieneRecorrido: true,
+    recorridoTitulo: 'Procesión en Honor a Santa Teresita',
+    recorridoDesc: 'Ruta procesional solemne desde las instalaciones de la I.E.E. Santa Teresita por las calles históricas de Cajamarca hacia la Iglesia La Catedral.',
     descripcion: 'Traslado procesional solemne de la imagen de Santa Teresita del Niño Jesús.'
   },
   {
@@ -216,6 +219,9 @@ const EVENTOS_TERESIANOS = [
     lugar: 'Iglesia La Catedral de Cajamarca',
     lugarTipo: 'externo',
     mapUrl: 'https://maps.google.com/?q=Catedral+de+Cajamarca',
+    tieneRecorrido: true,
+    recorridoTitulo: 'Eucaristía en Honor a Santa Teresita',
+    recorridoDesc: 'Llegada del recorrido procesional y celebración de la Santa Misa Central en la Iglesia La Catedral de Cajamarca.',
     descripcion: 'Misa solemne con asistencia de autoridades, directivos, docentes, estudiantes y exalumnas.'
   },
   {
@@ -599,6 +605,17 @@ function initAgenda() {
         ? `${ev.lugar} <a href="${ev.mapUrl}" target="_blank" rel="noopener noreferrer" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 2px; font-weight: 500; font-size: 0.82rem; margin-left: 0.25rem;" title="Abrir en Google Maps">(Ver mapa ↗)</a>`
         : ev.lugar;
 
+      const recorridoBtn = ev.tieneRecorrido ? `
+        <button type="button" class="btn-recorrido" onclick="abrirModalRecorrido('${ev.id}')" title="Ver recorrido interactivo de esta actividad">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+            <line x1="9" y1="3" x2="9" y2="18"></line>
+            <line x1="15" y1="6" x2="15" y2="21"></line>
+          </svg>
+          <span>Ver Recorrido Interactivo</span>
+        </button>
+      ` : '';
+
       return `
         <article class="event-card">
           <div class="event-card-header">
@@ -617,6 +634,7 @@ function initAgenda() {
               <span><strong>Lugar:</strong> ${lugarHtml}</span>
             </div>
           </div>
+          ${recorridoBtn}
         </article>
       `;
     }).join('');
@@ -661,6 +679,27 @@ function initAgenda() {
   // Render inicial
   renderEvents();
 }
+
+/* --------------------------------------------------------------------------
+   FUNCIÓN: MOSTRAR MODAL DE RECORRIDO INTERACTIVO (PROCESIÓN Y EUCARISTÍA)
+   -------------------------------------------------------------------------- */
+window.abrirModalRecorrido = function(id) {
+  const ev = EVENTOS_TERESIANOS.find(item => item.id === id);
+  if (!ev) return;
+
+  const modal = document.getElementById('modal-recorrido');
+  const titulo = document.getElementById('modal-recorrido-titulo');
+  const desc = document.getElementById('modal-recorrido-desc');
+  const mapsBtn = document.getElementById('modal-recorrido-maps-btn');
+
+  if (!modal) return;
+
+  if (titulo) titulo.textContent = ev.recorridoTitulo || ev.titulo;
+  if (desc) desc.textContent = ev.recorridoDesc || ev.descripcion;
+  if (mapsBtn && ev.mapUrl) mapsBtn.href = ev.mapUrl;
+
+  modal.classList.add('active');
+};
 
 
 /* --------------------------------------------------------------------------
