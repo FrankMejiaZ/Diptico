@@ -612,6 +612,37 @@ let activeDate = 'all';
 let activeCategory = 'all';
 let searchQuery = '';
 
+/**
+ * Determina la fecha inicial que se carga por defecto:
+ * - Si se especifica en la URL (?fecha=16 o ?dia=16), se selecciona ese día.
+ * - Si la fecha actual está en el mes de Setiembre y entre el 14 y 26, carga ese día.
+ * - Si aún no empieza (antes del 14) o ya finalizaron las actividades (después del 26), carga en 'Todas Fechas'.
+ */
+function obtenerFechaInicial() {
+  const params = new URLSearchParams(window.location.search);
+  const paramFecha = params.get('fecha') || params.get('dia');
+  if (paramFecha) {
+    const pill = document.querySelector(`.date-pill[data-date="${paramFecha}"]`);
+    if (pill) return paramFecha;
+  }
+
+  const hoy = new Date();
+  const mes = hoy.getMonth(); // 8 = Setiembre (0=Ene ... 8=Set)
+  const dia = hoy.getDate();
+
+  if (mes === 8) {
+    if (dia >= 14 && dia <= 26) {
+      const diaStr = dia.toString();
+      const pill = document.querySelector(`.date-pill[data-date="${diaStr}"]`);
+      if (pill) {
+        return diaStr;
+      }
+    }
+  }
+
+  return 'all';
+}
+
 function initAgenda() {
   const eventsContainer = document.getElementById('events-container');
   const datePills = document.querySelectorAll('.date-pill');
@@ -753,6 +784,19 @@ function initAgenda() {
       renderEvents();
     });
   }
+
+  // Auto-seleccionar píldora según la fecha inicial calculada
+  activeDate = obtenerFechaInicial();
+  datePills.forEach(pill => {
+    if (pill.dataset.date === activeDate) {
+      pill.classList.add('active');
+      setTimeout(() => {
+        pill.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+      }, 150);
+    } else {
+      pill.classList.remove('active');
+    }
+  });
 
   // Render inicial
   renderEvents();
