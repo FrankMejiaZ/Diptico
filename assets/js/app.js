@@ -348,7 +348,7 @@ const DISCIPLINAS_SECUNDARIA = [
   {
     area: 'Desarrollo Personal Ciudadanía y Cívica',
     actividad: '“Ruleta Digital Interactiva de la Identidad”',
-    lugar: 'Aula de 1er grado',
+    lugar: 'Aula de 1er grado “H”',
     hora: '8:00 am',
     icono: 'users'
   },
