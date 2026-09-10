@@ -644,7 +644,7 @@ function initAgenda() {
             </p>
 
             <p>
-              Agradecemos a Dios y a nuestra patrona, <strong>Santa Teresita del Niño Jesús</strong>, por sostener nuestra labor. Este proyecto triunfa gracias a la alianza con los padres de familia y a la responsabilidad de nuestras estudiantes. ¡Que la bendición divina nos acompañe para seguir educando con ciencia, virtud y acción!
+              Agradecemos a Dios y a nuestra patrona, <strong>Santa Teresita del Niño Jesús</strong>, por sostener nuestra labor. Este proyecto triunfa gracias al compromiso del personal de la I E y al acompañamiento de los padres de familia en la formación integral de nuestras estudiantes. ¡Que la bendición divina nos acompañe para seguir educando con ciencia, virtud y acción!
             </p>
           </div>
 
