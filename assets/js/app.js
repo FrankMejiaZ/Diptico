@@ -26,14 +26,14 @@ const EVENTOS_TERESIANOS = [
     dia: '15',
     mes: 'Setiembre',
     fechaCompleta: '15 de Setiembre de 2026',
-    titulo: 'Actuación por el 107° Aniversario Fundacional',
-    subtitulo: 'Congregación Canonesas de la Cruz',
+    titulo: 'Celebración por el 107° Aniversario Fundacional de la Congregación Canonesas de la Cruz',
+    subtitulo: 'Actuación',
     categoria: 'protocolar',
     categoriaNombre: 'Protocolar / Religioso',
     hora: '10:00 am',
     lugar: 'Patio de secundaria',
     lugarTipo: 'colegio',
-    descripcion: 'Homenaje y conmemoración comunitaria por los 107 años de la Congregación Canonesas de la Cruz.'
+    descripcion: 'Actuación y homenaje por los 107 años de la Congregación Canonesas de la Cruz.'
   },
   {
     id: 'ev-15-canonesas-misa',
@@ -41,14 +41,14 @@ const EVENTOS_TERESIANOS = [
     dia: '15',
     mes: 'Setiembre',
     fechaCompleta: '15 de Setiembre de 2026',
-    titulo: 'Eucaristía de Acción de Gracias',
-    subtitulo: '107° Aniversario Congregación Canonesas de la Cruz',
+    titulo: 'Celebración por el 107° Aniversario Fundacional de la Congregación Canonesas de la Cruz',
+    subtitulo: 'Eucaristía',
     categoria: 'protocolar',
     categoriaNombre: 'Protocolar / Religioso',
-    hora: '12:00 m',
+    hora: '12:30 pm',
     lugar: 'Capilla de la IE',
     lugarTipo: 'colegio',
-    descripcion: 'Solemne celebración eucarística en la capilla institucional.'
+    descripcion: 'Eucaristía y celebración solemne por los 107 años de la Congregación Canonesas de la Cruz.'
   },
   {
     id: 'ev-16-primaria-2do',
